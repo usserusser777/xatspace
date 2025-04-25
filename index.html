@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Texto centrado</title>
+    <title>Texto centrado con fondo GIF</title>
     <style>
         body {
             margin: 0;
@@ -10,16 +10,50 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            flex-direction: column;
+            font-family: Arial, sans-serif; /* Fuente general de respaldo */
+            background-color: #111;
+            text-align: center;
         }
+
         h1 {
-            font-size: 24px;
-            color: #333;
+            font-size: 48px;
+
+            /* 👉 Aquí puedes cambiar la fuente del título */
+            font-family: 'Impact', sans-serif;
+
+            background: url('https://xatimg.com/image/4PhZmXsYnjBo.gif') no-repeat center center;
+            background-size: cover;
+            -webkit-background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+            margin: 0 0 20px 0;
+        }
+
+        .texto {
+            font-size: 20px;
+            line-height: 1.6;
+            max-width: 600px;
+            padding: 0 20px;
+
+            /* 👉 Aquí puedes cambiar la fuente del texto principal */
+            font-family: 'Segoe UI', sans-serif;
+
+            background: url('https://xatimg.com/image/KiYAXSQawQq8.gif') no-repeat center center;
+            background-size: cover;
+            -webkit-background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
         }
     </style>
 </head>
 <body>
-    <h1>Texto en el centro</h1>
+    <h1>Franco</h1>
+    <div class="texto">
+        No todos entran a mi mundo.<br>
+        Soy selectivo, exigente y real.<br>
+        La chuzma, la mediocridad y lo ordinario no tienen cabida.<br>
+        Si no aportas luz, mejor ni toques la puerta.
+    </div>
 </body>
 </html>
