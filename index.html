@@ -1,65 +1,176 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Texto centrado con fondo GIF</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Card de Perfil</title>
 
-    <!-- Carga de Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            background-color: #111;
-            text-align: center;
-        }
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
-        h1 {
-            font-size: 48px;
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
-            /* 👉 Fuente Roboto en negrita para el título */
-            font-family: 'Roboto', sans-serif;
-            font-weight: 700;
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
 
-            background: url('https://xatimg.com/image/4PhZmXsYnjBo.gif') no-repeat center center;
-            background-size: cover;
-            -webkit-background-clip: text;
-            color: transparent;
-            -webkit-text-fill-color: transparent;
-            margin: 0 0 20px 0;
-        }
+    body, html {
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+    }
 
-        .texto {
-            font-size: 20px;
-            line-height: 1.6;
-            max-width: 600px;
-            padding: 0 20px;
+    /* Fondo de video */
+    .video-bg {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -1;
+      object-fit: cover;
+    }
 
-            /* 👉 Fuente Roboto regular para el texto */
-            font-family: 'Roboto', sans-serif;
-            font-weight: 400;
+    .card {
+      height: 400px;
+      width: 320px;
+      background-color: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(20px);
+      position: absolute;
+      margin: auto;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      border-radius: 8px;
+      box-shadow: 20px 20px 22px rgba(0,0,0,0.2);
+    }
 
-            background: url('https://xatimg.com/image/d27fwyMa7IX0.gif') no-repeat center center;
-            background-size: cover;
-            -webkit-background-clip: text;
-            color: transparent;
-            -webkit-text-fill-color: transparent;
-        }
-    </style>
+    .card-img {
+      height: 120px;
+      width: 120px;
+      background-color: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(20px);
+      border-radius: 50%;
+      position: absolute;
+      margin: 30px auto 20px auto;
+      left: 0;
+      right: 0;
+    }
+
+    .card-img img {
+      height: 86%;
+      border-radius: 50%;
+      margin-left: 7%;
+      margin-top: 7%;
+    }
+
+    .desc {
+      width: 100%;
+      text-align: center;
+      position: absolute;
+      top: 160px;
+      padding: 0 10px;
+    }
+
+    h6 {
+      margin: 0;
+    }
+
+    .primary-text {
+      color: #d5d5d5;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.7px;
+      margin: 5px 0;
+    }
+
+    .secondary-text {
+      color: #c0c0c0;
+      font-weight: 400;
+      font-size: 14px;
+      letter-spacing: 1px;
+      margin: 5px 0;
+    }
+
+    .xatSpace {
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+    }
+
+    .rating {
+      text-align: center;
+    }
+
+    a {
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      border: 3px solid #ffffff;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+
+    a .fa {
+      color: #FF0000;
+    }
+
+    @media screen and (min-width: 451px) {
+      a {
+        font-size: 18px;
+        padding: 8px 12px;
+      }
+    }
+
+    @media screen and (max-width: 450px) {
+      a {
+        font-size: 12px;
+        padding: 5px 8px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>Franco</h1>
-    <div class="texto">
-        No todos entran a mi mundo.<br>
-        Soy selectivo, exigente y real.<br>
-        La chuzma, la mediocridad y lo ordinario no tienen cabida.<br>
-        Si no aportas luz, mejor ni toques la puerta.
+
+  <!-- Video de fondo -->
+  <video class="video-bg" autoplay muted loop playsinline>
+    <source src="https://videos.pexels.com/video-files/6894947/6894947-uhd_2560_1440_30fps.mp4" type="video/mp4">
+    Tu navegador no soporta video HTML5.
+  </video>
+
+  <!-- Tarjeta -->
+  <div class="card">
+    <div class="card-img">
+      <img src="https://dl.dropbox.com/s/u3j25jx9tkaruap/Webp.net-resizeimage.jpg?raw=1" alt="Foto de perfil">
     </div>
+    <div class="desc">
+      <h6 class="primary-text">Franco (1984)</h6>
+      <h6 class="secondary-text">
+        Valoro lo auténtico, lo profundo y lo que suma.<br>
+        Prefiero rodearme de calidad antes que cantidad.<br>
+        Camino con luz propia, y solo abro la puerta a quienes también la traen.
+      </h6>
+    </div>
+    <div class="xatSpace">
+      <div class="rating">
+        <h6 class="primary-text">chileno 🇨🇱</h6>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón YouTube -->
+  <a href="https://youtu.be/4R8m56HGjvY" target="_blank">
+    Watch Me Code &nbsp;<i class="fa fa-youtube-play" aria-hidden="true"></i>
+  </a>
 </body>
 </html>
