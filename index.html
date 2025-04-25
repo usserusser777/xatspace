@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Texto centrado con fondo GIF</title>
+
+    <!-- Carga de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
         body {
             margin: 0;
@@ -11,7 +15,6 @@
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            font-family: Arial, sans-serif; /* Fuente general de respaldo */
             background-color: #111;
             text-align: center;
         }
@@ -19,10 +22,11 @@
         h1 {
             font-size: 48px;
 
-            /* 👉 Aquí puedes cambiar la fuente del título */
-            font-family: 'Impact', sans-serif;
+            /* 👉 Fuente Roboto en negrita para el título */
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
 
-            background: url('https://xatimg.com/image/4PhZmXsYnjBo.gif') no-repeat center center;
+            background: url('gif1.gif') no-repeat center center;
             background-size: cover;
             -webkit-background-clip: text;
             color: transparent;
@@ -36,10 +40,11 @@
             max-width: 600px;
             padding: 0 20px;
 
-            /* 👉 Aquí puedes cambiar la fuente del texto principal */
-            font-family: 'Segoe UI', sans-serif;
+            /* 👉 Fuente Roboto regular para el texto */
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
 
-            background: url('https://xatimg.com/image/d27fwyMa7IX0.gif') no-repeat center center;
+            background: url('gif2.gif') no-repeat center center;
             background-size: cover;
             -webkit-background-clip: text;
             color: transparent;
