@@ -7,8 +7,6 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
   <style>
@@ -23,7 +21,6 @@
       font-family: 'Poppins', sans-serif;
     }
 
-    /* Fondo de video */
     .video-bg {
       position: fixed;
       right: 0;
@@ -117,58 +114,79 @@
       color: #FF0000;
     }
 
-    @media screen and (min-width: 451px) {
-      a {
-        font-size: 18px;
-        padding: 8px 12px;
-      }
-    }
-
-    @media screen and (max-width: 450px) {
-      a {
-        font-size: 12px;
-        padding: 5px 8px;
-      }
+    .lang-button {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px 16px;
+      background-color: rgba(255,255,255,0.1);
+      color: #fff;
+      border: 1px solid #fff;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
     }
   </style>
 </head>
 <body>
 
-  <!-- Video de fondo -->
   <video class="video-bg" autoplay muted loop playsinline>
     <source src="https://videos.pexels.com/video-files/9694240/9694240-hd_1920_1080_25fps.mp4" type="video/mp4">
     Tu navegador no soporta video HTML5.
   </video>
 
-  <!-- Tarjeta -->
   <div class="card">
     <div class="card-img">
       <img src="https://xatimg.com/image/ERIKmUuLIbU5.png?raw=1" alt="Foto de perfil">
     </div>
 
     <div class="desc">
-      <h6 class="primary-text">Franco (1984)</h6>
+      <h6 class="primary-text" id="nombre">Franco (1984)</h6>
 
-      <h6 class="secondary-text">
-        Valoro lo auténtico, lo profundo y lo que suma; prefiero rodearme de calidad antes que cantidad.
-        <br>
+      <h6 class="secondary-text" id="descripcion">
+        Valoro lo auténtico, lo profundo y lo que suma; prefiero rodearme de calidad antes que cantidad.<br>
         Nunca he buscado aprobación; yo elijo a conciencia quién se queda.
       </h6>
 
-      <!-- Basura centrado -->
       <div style="text-align: center; margin-top: 15px;">
-        <i>Envidiosos = Ignore Forever</i>
+        <i id="envidia">Envidiosos = Ignore Forever</i>
       </div>
 
-      <!-- Chileno + bandera en una fila -->
       <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px;">
-        <h6 class="primary-text" style="margin: 0;">chileno</h6>
+        <h6 class="primary-text" style="margin: 0;" id="nacionalidad">chileno</h6>
         <img src="https://xatimg.com/image/ocHXrVUE1ehx.png" alt="Chile" style="width: 20px; height: auto;">
       </div>
     </div>
-
   </div>
+
+  <!-- Botón de idioma -->
+  <button class="lang-button" onclick="cambiarIdioma()">Ver en inglés</button>
+
+  <script>
+    let enIngles = false;
+
+    function cambiarIdioma() {
+      const descripcion = document.getElementById("descripcion");
+      const nacionalidad = document.getElementById("nacionalidad");
+      const envidia = document.getElementById("envidia");
+      const boton = document.querySelector(".lang-button");
+
+      if (!enIngles) {
+        descripcion.innerHTML = "I value authenticity, depth, and what adds up; I prefer quality over quantity.<br>I’ve never sought approval; I consciously choose who stays.";
+        nacionalidad.textContent = "Chilean";
+        envidia.textContent = "Haters = Ignore Forever";
+        boton.textContent = "Ver en español";
+        enIngles = true;
+      } else {
+        descripcion.innerHTML = "Valoro lo auténtico, lo profundo y lo que suma; prefiero rodearme de calidad antes que cantidad.<br>Nunca he buscado aprobación; yo elijo a conciencia quién se queda.";
+        nacionalidad.textContent = "chileno";
+        envidia.textContent = "Envidiosos = Ignore Forever";
+        boton.textContent = "Ver en inglés";
+        enIngles = false;
+      }
+    }
+  </script>
 
 </body>
 </html>
-
