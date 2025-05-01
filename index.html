@@ -149,7 +149,7 @@
 
       <h6 class="secondary-text" id="descripcion">
         Valoro lo auténtico, lo profundo y lo que suma; prefiero rodearme de calidad antes que cantidad.<br>
-        Nunca he buscado aprobación; yo elijo a conciencia quién se queda.
+        Nunca he buscado aprobación; <br>yo elijo a conciencia quién se queda.
       </h6>
 
       <div style="text-align: center; margin-top: 15px;">
@@ -183,13 +183,13 @@
       const boton = document.querySelector(".lang-button");
 
       if (!enIngles) {
-        descripcion.innerHTML = "I value authenticity, depth, and what adds up; I prefer quality over quantity.<br>I’ve never sought approval; I consciously choose who stays.";
+        descripcion.innerHTML = "I value authenticity, depth, and what adds up; I prefer quality over quantity.<br>I’ve never sought approval; <br>I consciously choose who stays.";
         nacionalidad.textContent = "Chilean";
         envidia.textContent = "Haters = Ignore Forever";
         boton.textContent = "Español";
         enIngles = true;
       } else {
-        descripcion.innerHTML = "Valoro lo auténtico, lo profundo y lo que suma; prefiero rodearme de calidad antes que cantidad.<br>Nunca he buscado aprobación; yo elijo a conciencia quién se queda.";
+        descripcion.innerHTML = "Valoro lo auténtico, lo profundo y lo que suma; prefiero rodearme de calidad antes que cantidad.<br>Nunca he buscado aprobación; <br>yo elijo a conciencia quién se queda.";
         nacionalidad.textContent = "Chileno";
         envidia.textContent = "Envidiosos = Ignore Forever";
         boton.textContent = "English";
