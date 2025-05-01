@@ -32,6 +32,7 @@
     }
 
     .card {
+      height: 400px;
       width: 320px;
       background-color: rgba(255, 255, 255, 0.06);
       backdrop-filter: blur(20px);
@@ -41,9 +42,8 @@
       right: 0;
       top: 0;
       bottom: 0;
-      border-radius: 16px;
+      border-radius: 8px;
       box-shadow: 20px 20px 22px rgba(0,0,0,0.2);
-      padding-bottom: 20px; /* espacio para el botón */
     }
 
     .card-img {
@@ -97,20 +97,37 @@
       text-align: justify;
     }
 
+    a {
+      color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      border: 3px solid #ffffff;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+
+    a .fa {
+      color: #FF0000;
+    }
+
     .lang-button {
       background-color: rgba(255, 255, 255, 0.1);
       color: #fff;
       border: 1px solid #fff;
-      border-radius: 999px; /* Píldora */
+      border-radius: 999px; /* Forma de píldora */
       cursor: pointer;
       font-family: 'Poppins', sans-serif;
       padding: 8px 20px;
       transition: background-color 0.3s ease, color 0.3s ease;
-      margin-top: 20px;
     }
-
+    
     .lang-button:hover {
-      background-color: rgba(255, 255, 255, 0.25);
+      background-color: rgba(255, 255, 255, 0.25); /* Más opaco al pasar el mouse */
+      color: #fff;
     }
 
   </style>
@@ -140,16 +157,18 @@
       </div>
 
       <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px;">
-        <h6 class="primary-text" style="margin: 0;" id="nacionalidad">Chileno</h6>
+        <h6 class="primary-text" style="margin: 0;" id="nacionalidad">chileno</h6>
         <img src="https://xatimg.com/image/ocHXrVUE1ehx.png" alt="Chile" style="width: 20px; height: auto;">
       </div>
+          <button class="lang-button" onclick="cambiarIdioma()">English</button>
+      <br>
+      <br>
     </div>
 
-    <!-- Botón de idioma dentro de la tarjeta -->
-    <div style="display: flex; justify-content: center;">
-      <button class="lang-button" onclick="cambiarIdioma()">English</button>
-    </div>
   </div>
+
+  <!-- Botón de idioma -->
+  
 
   <script>
     let enIngles = false;
