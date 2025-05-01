@@ -149,7 +149,7 @@
 
       <h6 class="secondary-text" id="descripcion">
         Valoro lo auténtico, lo profundo y lo que suma; prefiero rodearme de calidad antes que cantidad.<br>
-        Nunca he buscado aprobación; <br>yo elijo a conciencia quién se queda.
+        Nunca he necesitado la validación de nadie; <br>yo elijo a conciencia quién se queda.
       </h6>
 
       <div style="text-align: center; margin-top: 15px;">
@@ -174,29 +174,64 @@
   
 
   <script>
-    let enIngles = false;
-
-    function cambiarIdioma() {
-      const descripcion = document.getElementById("descripcion");
-      const nacionalidad = document.getElementById("nacionalidad");
-      const envidia = document.getElementById("envidia");
-      const boton = document.querySelector(".lang-button");
-
-      if (!enIngles) {
-        descripcion.innerHTML = "I value authenticity, depth, and what adds up; I prefer quality over quantity.<br>I’ve never sought approval; <br>I consciously choose who stays.";
-        nacionalidad.textContent = "Chilean";
-        envidia.textContent = "Haters = Ignore Forever";
-        boton.textContent = "Español";
-        enIngles = true;
-      } else {
-        descripcion.innerHTML = "Valoro lo auténtico, lo profundo y lo que suma; prefiero rodearme de calidad antes que cantidad.<br>Nunca he buscado aprobación; <br>yo elijo a conciencia quién se queda.";
-        nacionalidad.textContent = "Chileno";
-        envidia.textContent = "Envidiosos = Ignore Forever";
-        boton.textContent = "English";
-        enIngles = false;
-      }
+  // Textos por idioma
+  const textos = {
+    español: {
+      descripcion: "Valoro lo auténtico, lo profundo y lo que suma; prefiero rodearme de calidad antes que cantidad.<br>Nunca he necesitado la validación de nadie;<br>yo elijo a conciencia quién se queda.",
+      nacionalidad: "chileno",
+      envidia: "Envidiosos = Ignore Forever",
+      boton: "English",
+      dir: "ltr"
+    },
+    ingles: {
+      descripcion: "I value authenticity, depth, and what adds up; I prefer quality over quantity.<br>I've never needed anyone's validation;<br>I consciously choose who stays.",
+      nacionalidad: "chilean",
+      envidia: "Haters = Ignore Forever",
+      boton: "العربية",
+      dir: "ltr"
+    },
+    arab: {
+      descripcion: "أُقدّر الأصالة والعمق وما يُضيف لي. أُفضّل النوعية على الكمية.<br>لم أحتج يومًا إلى الاعتراف من الآخرين.<br>أختار بوعي من يبقى في حياتي.",
+      nacionalidad: "تشيلينو",
+      envidia: "الحساد = تجاهل دائمًا",
+      boton: "Español",
+      dir: "rtl"
     }
-  </script>
+  };
+
+  let Idioma = "ingles";
+
+  function cambiarIdioma() {
+    const descripcion = document.getElementById("descripcion");
+    const nacionalidad = document.getElementById("nacionalidad");
+    const envidia = document.getElementById("envidia");
+    const boton = document.querySelector(".lang-button");
+
+    if (Idioma === "ingles") {
+      descripcion.innerHTML = textos.ingles.descripcion;
+      descripcion.dir = textos.ingles.dir;
+      nacionalidad.textContent = textos.ingles.nacionalidad;
+      envidia.textContent = textos.ingles.envidia;
+      boton.textContent = textos.ingles.boton;
+      Idioma = "arab";
+    } else if (Idioma === "arab") {
+      descripcion.innerHTML = textos.arab.descripcion;
+      descripcion.dir = textos.arab.dir;
+      nacionalidad.textContent = textos.arab.nacionalidad;
+      envidia.textContent = textos.arab.envidia;
+      boton.textContent = textos.arab.boton;
+      Idioma = "español";
+    } else {
+      descripcion.innerHTML = textos.español.descripcion;
+      descripcion.dir = textos.español.dir;
+      nacionalidad.textContent = textos.español.nacionalidad;
+      envidia.textContent = textos.español.envidia;
+      boton.textContent = textos.español.boton;
+      Idioma = "ingles";
+    }
+  }
+</script>
+
 
 </body>
 </html>
