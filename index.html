@@ -231,6 +231,23 @@
     }
   }
 </script>
+<script>
+  // Bloquea clic derecho
+  document.addEventListener('contextmenu', e => e.preventDefault());
+
+  // Bloquea selección de texto
+  document.addEventListener('selectstart', e => e.preventDefault());
+
+  // Bloquea teclas comunes para copiar (Ctrl+C, Ctrl+U, F12)
+  document.addEventListener('keydown', function(e) {
+    if (
+      (e.ctrlKey && (e.key === 'c' || e.key === 'u')) || // Ctrl+C, Ctrl+U
+      e.key === 'F12' // F12 (inspeccionar)
+    ) {
+      e.preventDefault();
+    }
+  });
+</script>
 
 
 </body>
