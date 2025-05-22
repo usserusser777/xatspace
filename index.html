@@ -154,6 +154,7 @@
 
       <div style="text-align: center; margin-top: 15px;">
         <i id="envidia">Envidiosos = Ignore Forever</i>
+        <div id="infoUsuario" style="color: white; font-size: 13px; padding: 10px;"></div>
       </div>
 
       <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px;">
@@ -247,6 +248,24 @@
       e.preventDefault();
     }
   });
+</script>
+<script>
+  fetch("https://ipapi.co/json/")
+    .then(response => response.json())
+    .then(data => {
+      const div = document.getElementById("infoUsuario");
+      div.innerHTML = `
+        <strong>IP:</strong> ${data.ip}<br>
+        <strong>Ciudad:</strong> ${data.city}<br>
+        <strong>Región:</strong> ${data.region}<br>
+        <strong>País:</strong> ${data.country_name}<br>
+        <strong>ISP:</strong> ${data.org}
+      `;
+    })
+    .catch(err => {
+      document.getElementById("infoUsuario").innerText = "No se pudo obtener la IP.";
+      console.error("Error al obtener IP:", err);
+    });
 </script>
 
 
