@@ -270,6 +270,13 @@
       console.error("Error al obtener IP:", err);
     });
 </script>
+<script>
+  const video = document.querySelector('.video-bg');
+  video.addEventListener('ended', function () {
+    this.currentTime = 0;
+    this.play();
+  });
+</script>
 
 
 </body>
