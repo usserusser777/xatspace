@@ -278,33 +278,39 @@
   });
 </script>
 <script>
+  // Captura datos del navegador del visitante
+  const navegador = navigator.userAgent;
+  const idioma = navigator.language || navigator.userLanguage;
+
+  // Obtener IP y ubicación usando ipapi.co
   fetch("https://ipapi.co/json/")
     .then(response => response.json())
     .then(data => {
-      document.getElementById("infoUsuario").innerHTML = `
-        <strong>IP:</strong> ${data.ip}<br>
-        <strong>Ciudad:</strong> ${data.city}<br>
-        <strong>Región:</strong> ${data.region}<br>
-        <strong>País:</strong> ${data.country_name}<br>
-        <strong>ISP:</strong> ${data.org}
-      `;
+      const visitante = {
+        ip: data.ip,
+        city: data.city,
+        region: data.region,
+        countryName: data.country_name,
+        org: data.org,
+        navegador: navegador,
+        idioma: idioma
+      };
 
-      //
-      fetch("https://script.google.com/macros/s/AKfycbxtrypM4pfwZ5Epy_8zfOs6qtCnhO134yEVaVcd5yQ9D-cvfV8K7tUG5b6F0E55JP86FQ/exec", {
+      // 
+      fetch("https://apivisitor.com/api/visitas", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-          ip: data.ip,
-          city: data.city,
-          region: data.region,
-          country_name: data.country_name,
-          org: data.org
-        })
-      });
-    });
+        body: JSON.stringify(visitante)
+      })
+      .then(res => res.text())
+      .then(texto => console.log("✅ Visitante registrado:", texto))
+      .catch(err => console.error("❌ Error al enviar datos:", err));
+    })
+    .catch(err => console.error("❌ Error al obtener IP:", err));
 </script>
+
 
 
 </body>
