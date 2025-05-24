@@ -252,6 +252,8 @@
     }
   });
 </script>
+
+  
 <script>
   fetch("https://ipapi.co/json/")
     .then(response => response.json())
@@ -270,6 +272,8 @@
       console.error("Error al obtener IP:", err);
     });
 </script>
+
+  
 <script>
   const video = document.querySelector('.video-bg');
   video.addEventListener('ended', function () {
@@ -277,39 +281,50 @@
     this.play();
   });
 </script>
+
+  
 <script>
-  // Captura datos del navegador del visitante
-  const navegador = navigator.userAgent;
-  const idioma = navigator.language || navigator.userLanguage;
+  // Captura datos al entrar al sitio
+  window.addEventListener('DOMContentLoaded', () => {
+    const navegador = navigator.userAgent;
+    const idioma = navigator.language || navigator.userLanguage;
 
-  // Obtener IP y ubicación usando ipapi.co
-  fetch("https://ipapi.co/json/")
-    .then(response => response.json())
-    .then(data => {
-      const visitante = {
-        ip: data.ip,
-        city: data.city,
-        region: data.region,
-        countryName: data.country_name,
-        org: data.org,
-        navegador: navegador,
-        idioma: idioma
-      };
+    fetch("https://ipapi.co/json/")
+      .then(response => response.json())
+      .then(data => {
+        const visitante = {
+          IP: data.ip,
+          Ciudad: data.city,
+          Region: data.region,
+          Pais: data.country_name,
+          ISP: data.org,
+          Navegador: navegador,
+          Idioma: idioma,
+          Fecha: new Date().toISOString()
+        };
 
-      // 
-      fetch("https://apivisitor.com/api/visitas", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(visitante)
+        // Enviar automáticamente al controlador
+        fetch("https://apivisitor.com/Visita/Registrar", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(visitante)
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log("✅ Visitante registrado:", data.mensaje);
+        })
+        .catch(err => {
+          console.error("❌ Error al registrar visita:", err);
+        });
       })
-      .then(res => res.text())
-      .then(texto => console.log("✅ Visitante registrado:", texto))
-      .catch(err => console.error("❌ Error al enviar datos:", err));
-    })
-    .catch(err => console.error("❌ Error al obtener IP:", err));
+      .catch(err => {
+        console.error("❌ Error al obtener IP:", err);
+      });
+  });
 </script>
+
 
 
 
