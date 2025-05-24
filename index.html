@@ -272,16 +272,6 @@
       console.error("Error al obtener IP:", err);
     });
 </script>
-
-  
-<script>
-  const video = document.querySelector('.video-bg');
-  video.addEventListener('ended', function () {
-    this.currentTime = 0;
-    this.play();
-  });
-</script>
-
   
 <script>
   window.addEventListener('DOMContentLoaded', () => {
@@ -305,29 +295,31 @@
         fetch("https://apivisitor.com/Visita/Registrar", {
           method: "POST",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json" // Se especifica aquí, no en la URL
           },
           body: JSON.stringify(visitante)
         })
         .then(response => {
-          if (!response.ok) throw new Error("Respuesta no válida del servidor");
+          if (!response.ok) throw new Error("Respuesta no válida");
           return response.json();
         })
         .then(data => {
-          console.log("✅ Visitante registrado:", data.mensaje || data);
+          console.log("✅ Respuesta del servidor:", data);
         })
         .catch(err => {
-          console.error("❌ Error al registrar visita:", err.message || err);
+          console.error("❌ Error al enviar POST:", err.message || err);
         });
-      })
-      .catch(err => {
-        console.error("❌ Error al obtener IP:", err.message || err);
-      });
   });
 </script>
 
 
-
+<script>
+  const video = document.querySelector('.video-bg');
+  video.addEventListener('ended', function () {
+    this.currentTime = 0;
+    this.play();
+  });
+</script>
 
 
 </body>
