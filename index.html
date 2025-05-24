@@ -284,7 +284,6 @@
 
   
 <script>
-  // Captura datos al entrar al sitio
   window.addEventListener('DOMContentLoaded', () => {
     const navegador = navigator.userAgent;
     const idioma = navigator.language || navigator.userLanguage;
@@ -303,7 +302,6 @@
           Fecha: new Date().toISOString()
         };
 
-        // Enviar automáticamente al controlador
         fetch("https://apivisitor.com/Visita/Registrar", {
           method: "POST",
           headers: {
@@ -311,19 +309,23 @@
           },
           body: JSON.stringify(visitante)
         })
-        .then(response => response.json())
+        .then(response => {
+          if (!response.ok) throw new Error("Respuesta no válida del servidor");
+          return response.json();
+        })
         .then(data => {
-          console.log("✅ Visitante registrado:", data.mensaje);
+          console.log("✅ Visitante registrado:", data.mensaje || data);
         })
         .catch(err => {
-          console.error("❌ Error al registrar visita:", err);
+          console.error("❌ Error al registrar visita:", err.message || err);
         });
       })
       .catch(err => {
-        console.error("❌ Error al obtener IP:", err);
+        console.error("❌ Error al obtener IP:", err.message || err);
       });
   });
 </script>
+
 
 
 
