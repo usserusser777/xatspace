@@ -270,10 +270,7 @@
     .catch(err => {
       document.getElementById("infoUsuario").innerText = "No se pudo obtener la IP.";
       console.error("Error al obtener IP:", err);
-    });
-</script>
-  
-<script>
+    });<script>
   window.addEventListener('DOMContentLoaded', () => {
     const navegador = navigator.userAgent;
     const idioma = navigator.language || navigator.userLanguage;
@@ -295,7 +292,7 @@
         fetch("https://apivisitor.com/cors/proxy.aspx", {
           method: "POST",
           headers: {
-            "Content-Type": "application/json" // Se especifica aquí, no en la URL
+            "Content-Type": "application/json"
           },
           body: JSON.stringify(visitante)
         })
@@ -309,8 +306,16 @@
         .catch(err => {
           console.error("❌ Error al enviar POST:", err.message || err);
         });
-  });
+      })  // ← este .then(data => ...) debe cerrarse
+      .catch(err => {
+        console.error("❌ Error al obtener IP:", err);
+      });
+  }); // ← y este window.addEventListener también debe cerrarse
 </script>
+
+</script>
+  
+
 
 
 <script>
