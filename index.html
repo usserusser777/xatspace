@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>id(1984)</title>
   <link rel="icon" href="https://raw.githubusercontent.com/usserusser777/xatspace/main/img/icono.ico" type="image/x-icon">
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
@@ -15,12 +14,10 @@
       margin: 0;
       box-sizing: border-box;
     }
-
     body, html {
       height: 100%;
       font-family: 'Poppins', sans-serif;
     }
-
     .video-bg {
       position: fixed;
       right: 0;
@@ -30,7 +27,6 @@
       z-index: -1;
       object-fit: cover;
     }
-
     .card {
       width: 320px;
       height: 550px;
@@ -44,10 +40,8 @@
       bottom: 0;
       border-radius: 8px;
       box-shadow: 20px 20px 22px rgba(0,0,0,0.2);
-      padding-bottom: 20px; /* Agrega espacio interior si es necesario */
+      padding-bottom: 20px;
     }
-
-
     .card-img {
       height: 120px;
       width: 120px;
@@ -59,27 +53,22 @@
       left: 0;
       right: 0;
     }
-
     .card-img img {
       height: 86%;
       border-radius: 50%;
       margin-left: 7%;
       margin-top: 7%;
     }
-
     .desc {
       width: 100%;
       text-align: center;
-      position: relative; /* Cambia esto */
-      top: auto;          /* Elimina desplazamiento absoluto */
-      padding: 160px 10px 0 10px; /* Simula el espacio desde la imagen hacia abajo */
+      position: relative;
+      top: auto;
+      padding: 160px 10px 0 10px;
     }
-
-
     h6 {
       margin: 0;
     }
-
     .primary-text {
       color: #d5d5d5;
       font-size: 16px;
@@ -87,7 +76,6 @@
       letter-spacing: 0.7px;
       margin: 5px 0;
     }
-
     .secondary-text {
       color: #c0c0c0;
       font-weight: 400;
@@ -99,7 +87,6 @@
       overflow-wrap: anywhere;
       text-align: justify;
     }
-
     a {
       color: #ffffff;
       font-family: 'Poppins', sans-serif;
@@ -112,27 +99,23 @@
       border-radius: 5px;
       text-decoration: none;
     }
-
     a .fa {
       color: #FF0000;
     }
-
     .lang-button {
       background-color: rgba(255, 255, 255, 0.1);
       color: #fff;
       border: 1px solid #fff;
-      border-radius: 999px; /* Forma de píldora */
+      border-radius: 999px;
       cursor: pointer;
       font-family: 'Poppins', sans-serif;
       padding: 8px 20px;
       transition: background-color 0.3s ease, color 0.3s ease;
     }
-    
     .lang-button:hover {
-      background-color: rgba(255, 255, 255, 0.25); /* Más opaco al pasar el mouse */
+      background-color: rgba(255, 255, 255, 0.25);
       color: #fff;
     }
-
   </style>
 </head>
 <body>
@@ -149,7 +132,6 @@
 
     <div class="desc">
       <h6 class="primary-text" id="nombre">Franco id(1984)</h6>
-
       <h6 class="secondary-text" id="descripcion">
         Valoro lo auténtico, lo profundo y lo que suma; prefiero rodearme de calidad antes que cantidad.<br>
         Nunca he necesitado la validación de nadie; <br>yo elijo a conciencia quién se queda.
@@ -168,164 +150,137 @@
       <div style="text-align: center;">
         <button class="lang-button" onclick="cambiarIdioma()">English</button>
       </div>
-      <br>
-      <br>
+      <br><br>
     </div>
-
   </div>
 
-  <!-- Botón de idioma -->
-  
+  <script>
+    const textos = {
+      español: {
+        descripcion: "Valoro lo auténtico, lo profundo y lo que suma; prefiero rodearme de calidad antes que cantidad.<br>Nunca he necesitado la validación de nadie;<br>yo elijo a conciencia quién se queda.",
+        nacionalidad: "chileno",
+        envidia: "Envidiosos = Ignore Forever",
+        boton: "English",
+        dir: "ltr"
+      },
+      ingles: {
+        descripcion: "I value authenticity, depth, and what adds up; I prefer quality over quantity.<br>I've never needed anyone's validation;<br>I consciously choose who stays.",
+        nacionalidad: "chilean",
+        envidia: "Haters = Ignore Forever",
+        boton: "Arabic",
+        dir: "ltr"
+      },
+      arab: {
+        descripcion: "أُقدّر الأصالة والعمق وما يُضيف لي. أُفضّل النوعية على الكمية.<br>لم أحتج يومًا إلى الاعتراف من الآخرين.<br>أختار بوعي من يبقى في حياتي.",
+        nacionalidad: "تشيلينو",
+        envidia: "الحساد = تجاهل دائمًا",
+        boton: "Español",
+        dir: "rtl"
+      }
+    };
+
+    let Idioma = "ingles";
+
+    function cambiarIdioma() {
+      const descripcion = document.getElementById("descripcion");
+      const nacionalidad = document.getElementById("nacionalidad");
+      const envidia = document.getElementById("envidia");
+      const boton = document.querySelector(".lang-button");
+
+      if (Idioma === "ingles") {
+        descripcion.innerHTML = textos.ingles.descripcion;
+        descripcion.dir = textos.ingles.dir;
+        nacionalidad.textContent = textos.ingles.nacionalidad;
+        envidia.textContent = textos.ingles.envidia;
+        boton.textContent = textos.ingles.boton;
+        Idioma = "arab";
+      } else if (Idioma === "arab") {
+        descripcion.innerHTML = textos.arab.descripcion;
+        descripcion.dir = textos.arab.dir;
+        nacionalidad.textContent = textos.arab.nacionalidad;
+        envidia.textContent = textos.arab.envidia;
+        boton.textContent = textos.arab.boton;
+        Idioma = "español";
+      } else {
+        descripcion.innerHTML = textos.español.descripcion;
+        descripcion.dir = textos.español.dir;
+        nacionalidad.textContent = textos.español.nacionalidad;
+        envidia.textContent = textos.español.envidia;
+        boton.textContent = textos.español.boton;
+        Idioma = "ingles";
+      }
+    }
+  </script>
 
   <script>
-  // Textos por idioma
-  const textos = {
-    español: {
-      descripcion: "Valoro lo auténtico, lo profundo y lo que suma; prefiero rodearme de calidad antes que cantidad.<br>Nunca he necesitado la validación de nadie;<br>yo elijo a conciencia quién se queda.",
-      nacionalidad: "chileno",
-      envidia: "Envidiosos = Ignore Forever",
-      boton: "English",
-      dir: "ltr"
-    },
-    ingles: {
-      descripcion: "I value authenticity, depth, and what adds up; I prefer quality over quantity.<br>I've never needed anyone's validation;<br>I consciously choose who stays.",
-      nacionalidad: "chilean",
-      envidia: "Haters = Ignore Forever",
-      boton: "Arabic",
-      dir: "ltr"
-    },
-    arab: {
-      descripcion: "أُقدّر الأصالة والعمق وما يُضيف لي. أُفضّل النوعية على الكمية.<br>لم أحتج يومًا إلى الاعتراف من الآخرين.<br>أختار بوعي من يبقى في حياتي.",
-      nacionalidad: "تشيلينو",
-      envidia: "الحساد = تجاهل دائمًا",
-      boton: "Español",
-      dir: "rtl"
-    }
-  };
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('selectstart', e => e.preventDefault());
+    document.addEventListener('keydown', function(e) {
+      if ((e.ctrlKey && (e.key === 'c' || e.key === 'u')) || e.key === 'F12') {
+        e.preventDefault();
+      }
+    });
+  </script>
 
-  let Idioma = "ingles";
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const navegador = navigator.userAgent;
+      const idioma = navigator.language || navigator.userLanguage;
 
-  function cambiarIdioma() {
-    const descripcion = document.getElementById("descripcion");
-    const nacionalidad = document.getElementById("nacionalidad");
-    const envidia = document.getElementById("envidia");
-    const boton = document.querySelector(".lang-button");
-
-    if (Idioma === "ingles") {
-      descripcion.innerHTML = textos.ingles.descripcion;
-      descripcion.dir = textos.ingles.dir;
-      nacionalidad.textContent = textos.ingles.nacionalidad;
-      envidia.textContent = textos.ingles.envidia;
-      boton.textContent = textos.ingles.boton;
-      Idioma = "arab";
-    } else if (Idioma === "arab") {
-      descripcion.innerHTML = textos.arab.descripcion;
-      descripcion.dir = textos.arab.dir;
-      nacionalidad.textContent = textos.arab.nacionalidad;
-      envidia.textContent = textos.arab.envidia;
-      boton.textContent = textos.arab.boton;
-      Idioma = "español";
-    } else {
-      descripcion.innerHTML = textos.español.descripcion;
-      descripcion.dir = textos.español.dir;
-      nacionalidad.textContent = textos.español.nacionalidad;
-      envidia.textContent = textos.español.envidia;
-      boton.textContent = textos.español.boton;
-      Idioma = "ingles";
-    }
-  }
-</script>
-<script>
-  // Bloquea clic derecho
-  document.addEventListener('contextmenu', e => e.preventDefault());
-
-  // Bloquea selección de texto
-  document.addEventListener('selectstart', e => e.preventDefault());
-
-  // Bloquea teclas comunes para copiar (Ctrl+C, Ctrl+U, F12)
-  document.addEventListener('keydown', function(e) {
-    if (
-      (e.ctrlKey && (e.key === 'c' || e.key === 'u')) || // Ctrl+C, Ctrl+U
-      e.key === 'F12' // F12 (inspeccionar)
-    ) {
-      e.preventDefault();
-    }
-  });
-</script>
-
-  
-<script>
-  fetch("https://ipapi.co/json/")
-    .then(response => response.json())
-    .then(data => {
-      const div = document.getElementById("infoUsuario");
-      div.innerHTML = `
-        <strong>IP:</strong> ${data.ip}<br>
-        <strong>Ciudad:</strong> ${data.city}<br>
-        <strong>Región:</strong> ${data.region}<br>
-        <strong>País:</strong> ${data.country_name}<br>
-        <strong>ISP:</strong> ${data.org}
-      `;
-    })
-    .catch(err => {
-      document.getElementById("infoUsuario").innerText = "No se pudo obtener la IP.";
-      console.error("Error al obtener IP:", err);
-    });<script>
-  window.addEventListener('DOMContentLoaded', () => {
-    const navegador = navigator.userAgent;
-    const idioma = navigator.language || navigator.userLanguage;
-
-    fetch("https://ipapi.co/json/")
-      .then(response => response.json())
-      .then(data => {
-        const visitante = {
-          IP: data.ip,
-          Ciudad: data.city,
-          Region: data.region,
-          Pais: data.country_name,
-          ISP: data.org,
-          Navegador: navegador,
-          Idioma: idioma,
-          Fecha: new Date().toISOString()
-        };
-
-        fetch("https://apivisitor.com/cors/proxy.aspx", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(visitante)
-        })
-        .then(response => {
-          if (!response.ok) throw new Error("Respuesta no válida");
-          return response.json();
-        })
+      fetch("https://ipapi.co/json/")
+        .then(response => response.json())
         .then(data => {
-          console.log("✅ Respuesta del servidor:", data);
+          const visitante = {
+            IP: data.ip,
+            Ciudad: data.city,
+            Region: data.region,
+            Pais: data.country_name,
+            ISP: data.org,
+            Navegador: navegador,
+            Idioma: idioma,
+            Fecha: new Date().toISOString()
+          };
+
+          document.getElementById("infoUsuario").innerHTML = `
+            <strong>IP:</strong> ${data.ip}<br>
+            <strong>Ciudad:</strong> ${data.city}<br>
+            <strong>Región:</strong> ${data.region}<br>
+            <strong>País:</strong> ${data.country_name}<br>
+            <strong>ISP:</strong> ${data.org}
+          `;
+
+          fetch("https://apivisitor.com/cors/proxy.aspx", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(visitante)
+          })
+          .then(response => {
+            if (!response.ok) throw new Error("Respuesta no válida");
+            return response.json();
+          })
+          .then(data => {
+            console.log("✅ Respuesta del servidor:", data);
+          })
+          .catch(err => {
+            console.error("❌ Error al enviar POST:", err.message || err);
+          });
         })
         .catch(err => {
-          console.error("❌ Error al enviar POST:", err.message || err);
+          document.getElementById("infoUsuario").innerText = "No se pudo obtener la IP.";
+          console.error("❌ Error al obtener IP:", err);
         });
-      })  // ← este .then(data => ...) debe cerrarse
-      .catch(err => {
-        console.error("❌ Error al obtener IP:", err);
-      });
-  }); // ← y este window.addEventListener también debe cerrarse
-</script>
+    });
+  </script>
 
-</script>
-  
-
-
-
-<script>
-  const video = document.querySelector('.video-bg');
-  video.addEventListener('ended', function () {
-    this.currentTime = 0;
-    this.play();
-  });
-</script>
-
+  <script>
+    const video = document.querySelector('.video-bg');
+    video.addEventListener('ended', function () {
+      this.currentTime = 0;
+      this.play();
+    });
+  </script>
 
 </body>
 </html>
