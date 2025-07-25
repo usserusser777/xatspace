@@ -47,12 +47,19 @@
       overflow: hidden;
     }
 
+    
+
     .card-header {
-      text-align: center;
-      padding: 20px 15px 10px;
-      background: linear-gradient(to right, #74b9ff, #a29bfe);
-      color: #fff;
       position: relative;
+      display: flex;
+      height: 200px;
+      flex-shrink: 0;
+      width: 100%;
+      transition: 0.3s;
+    
+      * {
+        transition: 0.3s;
+      }
     }
 
     .card-avatar {
@@ -157,7 +164,7 @@
 <body>
 
 <video autoplay muted loop playsinline id="background-video">
-  <source src="https://cdn.pixabay.com/video/2017/10/20/12529-239934665_large.mp4" type="video/mp4" />
+  <source src="https://cdn.pixabay.com/video/2020/08/08/46679-448489453_large.mp4" type="video/mp4" />
 </video>
 
 <div class="card" data-state="#about">
