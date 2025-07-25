@@ -5,263 +5,285 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>id(1984)</title>
   <link rel="icon" href="https://raw.githubusercontent.com/usserusser777/xatspace/main/img/icono.ico" type="image/x-icon">
-
   <style>
-@import url("https://fonts.googleapis.com/css?family=DM+Sans:400,500|Jost:400,500,600&display=swap");
+    @import url("https://fonts.googleapis.com/css?family=DM+Sans:400,500|Jost:400,500,600&display=swap");
 
-* {
-  box-sizing: border-box;
-}
-body {
-  color: #2b2c48;
-  font-family: "Jost", sans-serif;
-  background: #000;
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  display: flex;
-  flex-wrap: wrap;
-  padding: 20px;
-  position: relative;
-  overflow: hidden;
-}
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      color: #2b2c48;
+      font-family: "Jost", sans-serif;
+      background: #000;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
 
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  background: #000;
-}
+    #background-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      pointer-events: none;
+    }
 
-#background-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -2;
-  pointer-events: none;
-}
+    .card {
+      max-width: 340px;
+      height: 450px;
+      margin: auto;
+      overflow-y: auto;
+      position: relative;
+      z-index: 1;
+      background-color: rgba(255, 255, 255, 1);
+      display: flex;
+      transition: 0.3s;
+      flex-direction: column;
+      border-radius: 10px;
+      box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.2);
+    }
 
-.card {
-  max-width: 340px;
-  height: 450px;
-  margin: auto;
-  overflow-y: auto;
-  position: relative;
-  z-index: 1;
-  overflow-x: hidden;
-  background-color: rgba(255, 255, 255, 1);
-  display: flex;
-  transition: 0.3s;
-  flex-direction: column;
-  border-radius: 10px;
-  box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.2);
-}
+    .card-header {
+      position: relative;
+      display: flex;
+      height: 200px;
+      flex-shrink: 0;
+      width: 100%;
+    }
 
+    .card-cover {
+      width: 100%;
+      height: 160px;
+      position: absolute;
+      top: -20%;
+      left: 0;
+      background-size: cover;
+      background-position: center;
+      filter: blur(30px);
+      transform: scale(1.2);
+    }
 
+    .card-avatar {
+      width: 100px;
+      height: 100px;
+      box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 50%;
+      object-position: center;
+      object-fit: cover;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%) translateY(-64px);
+    }
 
-.card-main {
-  position: relative;
-  flex: 1;
-  display: flex;
-  padding-top: 10px;
-  flex-direction: column;
-}
+    .card-fullname {
+      position: absolute;
+      bottom: 0;
+      font-size: 22px;
+      font-weight: 700;
+      text-align: center;
+      white-space: nowrap;
+      transform: translateY(-10px) translateX(-50%);
+      left: 50%;
+    }
 
-.card-subtitle {
-  font-weight: 700;
-  font-size: 13px;
-  margin-bottom: 8px;
-}
+    .card-jobtitle {
+      position: absolute;
+      bottom: 0;
+      font-size: 11px;
+      white-space: nowrap;
+      font-weight: 500;
+      opacity: 0.7;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin: 0;
+      left: 50%;
+      transform: translateX(-50%) translateY(-7px);
+    }
 
-.card-content {
-  padding: 20px;
-}
+    .card-main {
+      position: relative;
+      flex: 1;
+      display: flex;
+      padding-top: 10px;
+      flex-direction: column;
+    }
 
-.card-desc {
-  line-height: 1.6;
-  color: #636b6f;
-  font-size: 14px;
-  margin: 0;
-  font-weight: 400;
-  font-family: "DM Sans", sans-serif;
-}
+    .card-subtitle {
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
 
-.card-buttons {
-  display: flex;
-  background-color: #fff;
-  margin-top: auto;
-  position: sticky;
-  bottom: 0;
-  left: 0;
-}
+    .card-content {
+      padding: 20px;
+    }
 
-.card-buttons button {
-  flex: 1 1 auto;
-  user-select: none;
-  background: 0;
-  font-size: 13px;
-  border: 0;
-  padding: 15px 5px;
-  cursor: pointer;
-  color: #5c5c6d;
-  transition: 0.3s;
-  font-family: "Jost", sans-serif;
-  font-weight: 500;
-  outline: 0;
-  border-bottom: 3px solid transparent;
-}
+    .card-desc {
+      line-height: 1.6;
+      color: #636b6f;
+      font-size: 14px;
+      margin: 0;
+      font-weight: 400;
+      font-family: "DM Sans", sans-serif;
+    }
 
-.card-buttons button.is-active,
-.card-buttons button:hover {
-  color: #2b2c48;
-  border-bottom: 3px solid #8a84ff;
-  background: linear-gradient(
-    to bottom,
-    rgba(127, 199, 231, 0) 0%,
-    rgba(207, 204, 255, 0.2) 44%,
-    rgba(211, 226, 255, 0.4) 100%
-  );
-}
+    .card-buttons {
+      display: flex;
+      background-color: #fff;
+      margin-top: auto;
+      position: sticky;
+      bottom: 0;
+      left: 0;
+    }
 
-.card-section {
-  display: none;
-}
-.card-section.is-active {
-  display: block;
-  animation: fadeIn 0.6s both;
-}
+    .card-buttons button {
+      flex: 1 1 auto;
+      user-select: none;
+      background: 0;
+      font-size: 13px;
+      border: 0;
+      padding: 15px 5px;
+      cursor: pointer;
+      color: #5c5c6d;
+      transition: 0.3s;
+      font-family: "Jost", sans-serif;
+      font-weight: 500;
+      outline: 0;
+      border-bottom: 3px solid transparent;
+    }
 
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  100% {
-    opacity: 1;
-  }
-}
+    .card-buttons button.is-active,
+    .card-buttons button:hover {
+      color: #2b2c48;
+      border-bottom: 3px solid #8a84ff;
+      background: linear-gradient(to bottom, rgba(127, 199, 231, 0) 0%, rgba(207, 204, 255, 0.2) 44%, rgba(211, 226, 255, 0.4) 100%);
+    }
+
+    .card-section {
+      display: none;
+    }
+    .card-section.is-active {
+      display: block;
+      animation: fadeIn 0.6s both;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      100% {
+        opacity: 1;
+      }
+    }
   </style>
 </head>
 <body>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const buttons = document.querySelectorAll(".card-buttons button");
-  const sections = document.querySelectorAll(".card-section");
-  const card = document.querySelector(".card");
-  const mirrorText = document.getElementById("mirror-text");
-  const subtitleElement = document.querySelector("#about .card-subtitle");
+  <video autoplay muted loop playsinline id="background-video">
+    <source src="https://cdn.pixabay.com/video/2016/09/13/5200-183786525_large.mp4" type="video/mp4">
+  </video>
 
-  const mirrorTranslations = {
-    "#about": {
-      text: "Este es tu espejo, lo mismo que piensas de los demás es lo que eres tú como persona y se refleja en ti.",
-      subtitle: "ESPAÑOL",
-      rtl: false
-    },
-    "#experience": {
-      text: "This is your mirror, what you think of others is who you are as a person and it reflects on you.",
-      subtitle: "ENGLISH",
-      rtl: false
-    },
-    "#contact": {
-      text: "هذا هو مرآتك، ما تفكر به عن الآخرين هو ما أنت عليه كإنسان، وهو ينعكس عليك.",
-      subtitle: "ARABIC",
-      rtl: true
-    }
-  };
-
-  const updateMirrorText = (sectionId) => {
-    const translation = mirrorTranslations[sectionId];
-    if (translation && mirrorText) {
-      mirrorText.innerText = translation.text;
-      mirrorText.style.textAlign = translation.rtl ? "right" : "left";
-      mirrorText.setAttribute("dir", translation.rtl ? "rtl" : "ltr");
-      if (subtitleElement) subtitleElement.innerText = translation.subtitle;
-    }
-  };
-
-  const handleButtonClick = (e) => {
-    const targetSection = e.target.getAttribute("data-section");
-    const section = document.querySelector(targetSection);
-
-    card.setAttribute("data-state", targetSection);
-    targetSection !== "#about"
-      ? card.classList.add("is-active")
-      : card.classList.remove("is-active");
-
-    sections.forEach((s) => s.classList.remove("is-active"));
-    buttons.forEach((b) => b.classList.remove("is-active"));
-    e.target.classList.add("is-active");
-    section.classList.add("is-active");
-
-    updateMirrorText(targetSection);
-  };
-
-  buttons.forEach((btn) => {
-    btn.addEventListener("click", handleButtonClick);
-  });
-});
-</script>
-<!-- VIDEO DE FONDO -->
-<video autoplay muted loop playsinline id="bg-video" style="
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
-  z-index: -1;
-  object-fit: cover;
-">
-  <source src="https://cdn.pixabay.com/video/2016/09/13/5200-183786525_large.mp4" type="video/mp4" />
-</video>
-
-<!-- TARJETA -->
-<div class="card" data-state="#about">
-  <div class="card-header">
-    <div class="card-cover" style="background-image: url('background-image: url('https://images.unsplash.com/photo-1549068106-b024baf5062d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80')"></div>
-    <img class="card-avatar" src="https://raw.githubusercontent.com/usserusser777/xatspace/main/img/foto.png" alt="avatar" />
-    <h1 class="card-fullname">Fran</h1>
-    <h2 class="card-jobtitle">iD xat (1984)</h2>
-  </div>
-  <div class="card-main">
-    <div class="card-section is-active" id="about">
-      <div class="card-content">
-        <div class="card-subtitle">ESPAÑOL</div>
-        <p class="card-desc mirror" id="mirror-text">
-          Este es tu espejo, lo mismo que piensas de los demás es lo que eres tú como persona y se refleja en ti.
-        </p>
-      </div>
+  <div class="card" data-state="#about">
+    <div class="card-header">
+      <div class="card-cover" style="background-image: url('https://images.unsplash.com/photo-1549068106-b024baf5062d?ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80')"></div>
+      <img class="card-avatar" src="https://raw.githubusercontent.com/usserusser777/xatspace/main/img/foto.png" alt="avatar" />
+      <h1 class="card-fullname">Fran</h1>
+      <h2 class="card-jobtitle">iD xat (1984)</h2>
     </div>
-    <div class="card-section" id="experience">
-      <div class="card-content">
-        <div class="card-subtitle">ENGLISH</div>
-        <p class="card-desc mirror" id="mirror-text-experience" style="display:none;">
-          This is your mirror, what you think of others is who you are as a person and it reflects on you.
-        </p>
+    <div class="card-main">
+      <div class="card-section is-active" id="about">
+        <div class="card-content">
+          <div class="card-subtitle">ESPAÑOL</div>
+          <p class="card-desc mirror" id="mirror-text">
+            Este es tu espejo, lo mismo que piensas de los demás es lo que eres tú como persona y se refleja en ti.
+          </p>
+        </div>
       </div>
-    </div>
-    <div class="card-section" id="contact">
-      <div class="card-content">
-        <div class="card-subtitle">ARABIC</div>
-        <p class="card-desc mirror" id="mirror-text-contact" dir="rtl" style="display:none; text-align:right;">
-          هذا هو مرآتك، ما تفكر به عن الآخرين هو ما أنت عليه كإنسان، وهو ينعكس عليك.
-        </p>
+      <div class="card-section" id="experience">
+        <div class="card-content">
+          <div class="card-subtitle">ENGLISH</div>
+          <p class="card-desc mirror">
+            This is your mirror, what you think of others is who you are as a person and it reflects on you.
+          </p>
+        </div>
       </div>
-    </div>
-    <div class="card-buttons">
-      <button data-section="#about" class="is-active">ESPAÑOL</button>
-      <button data-section="#experience">ENGLISH</button>
-      <button data-section="#contact">ARABIC</button>
+      <div class="card-section" id="contact">
+        <div class="card-content">
+          <div class="card-subtitle">ARABIC</div>
+          <p class="card-desc mirror" dir="rtl" style="text-align:right;">
+            هذا هو مرآتك، ما تفكر به عن الآخرين هو ما أنت عليه كإنسان، وهو ينعكس عليك.
+          </p>
+        </div>
+      </div>
+      <div class="card-buttons">
+        <button data-section="#about" class="is-active">ESPAÑOL</button>
+        <button data-section="#experience">ENGLISH</button>
+        <button data-section="#contact">ARABIC</button>
+      </div>
     </div>
   </div>
-</div>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const buttons = document.querySelectorAll(".card-buttons button");
+      const sections = document.querySelectorAll(".card-section");
+      const card = document.querySelector(".card");
+      const mirrorText = document.getElementById("mirror-text");
+      const subtitleElement = document.querySelector("#about .card-subtitle");
 
+      const mirrorTranslations = {
+        "#about": {
+          text: "Este es tu espejo, lo mismo que piensas de los demás es lo que eres tú como persona y se refleja en ti.",
+          subtitle: "ESPAÑOL",
+          rtl: false
+        },
+        "#experience": {
+          text: "This is your mirror, what you think of others is who you are as a person and it reflects on you.",
+          subtitle: "ENGLISH",
+          rtl: false
+        },
+        "#contact": {
+          text: "هذا هو مرآتك، ما تفكر به عن الآخرين هو ما أنت عليه كإنسان، وهو ينعكس عليك.",
+          subtitle: "ARABIC",
+          rtl: true
+        }
+      };
+
+      const updateMirrorText = (sectionId) => {
+        const translation = mirrorTranslations[sectionId];
+        if (translation && mirrorText) {
+          mirrorText.innerText = translation.text;
+          mirrorText.style.textAlign = translation.rtl ? "right" : "left";
+          mirrorText.setAttribute("dir", translation.rtl ? "rtl" : "ltr");
+          if (subtitleElement) subtitleElement.innerText = translation.subtitle;
+        }
+      };
+
+      const handleButtonClick = (e) => {
+        const targetSection = e.target.getAttribute("data-section");
+        const section = document.querySelector(targetSection);
+
+        sections.forEach((s) => s.classList.remove("is-active"));
+        buttons.forEach((b) => b.classList.remove("is-active"));
+        e.target.classList.add("is-active");
+        section.classList.add("is-active");
+
+        updateMirrorText(targetSection);
+      };
+
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", handleButtonClick);
+      });
+    });
+  </script>
 </body>
 </html>
