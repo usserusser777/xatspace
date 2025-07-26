@@ -3,13 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>id(1984)</title>
+  <title>Fran iD xat (1984)</title>
   <link rel="icon" href="https://raw.githubusercontent.com/usserusser777/xatspace/main/img/icono.ico" type="image/x-icon">
   <style>
 @import url("https://fonts.googleapis.com/css?family=DM+Sans:400,500|Jost:400,500,600&display=swap");
 
 * {
   box-sizing: border-box;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 body {
   font-family: "Jost", sans-serif;
@@ -227,6 +231,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+// Bloquear clic derecho
+  document.addEventListener("contextmenu", function(e) {
+    e.preventDefault();
+  });
+
+  // Bloquear teclas comunes de copiado (Ctrl+C, Ctrl+X, Ctrl+U, Ctrl+S, F12, etc.)
+  document.addEventListener("keydown", function(e) {
+    if (
+      (e.ctrlKey && ['c', 'x', 'u', 's', 'p'].includes(e.key.toLowerCase())) || // Ctrl+C/X/U/S/P
+      e.key === "F12" || // Herramientas de desarrollador
+      (e.ctrlKey && e.shiftKey && ['i', 'j'].includes(e.key.toLowerCase())) // Ctrl+Shift+I/J
+    ) {
+      e.preventDefault();
+    }
+  });
 </script>
 
 </body>
