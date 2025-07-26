@@ -43,22 +43,16 @@ video#bg-video {
   box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.15);
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .card-header {
   position: relative;
-  height: 160px;
+  height: 140px;
   background-image: url('https://raw.githubusercontent.com/usserusser777/xatspace/main/img/foto.png');
   background-size: cover;
   background-position: center;
-  filter: blur(30px);
-}
-
-.card-header::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(255,255,255,0.2);
+  filter: blur(25px);
 }
 
 .card-avatar {
@@ -67,16 +61,18 @@ video#bg-video {
   border-radius: 50%;
   object-fit: cover;
   position: absolute;
-  bottom: -50px;
+  top: 90px;
   left: 50%;
   transform: translateX(-50%);
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  z-index: 1;
+  z-index: 2;
+  background: white;
+  padding: 3px;
 }
 
 .card-main {
   flex: 1;
-  padding-top: 60px;
+  padding-top: 70px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -174,9 +170,8 @@ video#bg-video {
 </video>
 
 <div class="card" data-state="#about">
-  <div class="card-header">
-    <img class="card-avatar" src="https://raw.githubusercontent.com/usserusser777/xatspace/main/img/foto.png" alt="avatar" />
-  </div>
+  <div class="card-header"></div>
+  <img class="card-avatar" src="https://raw.githubusercontent.com/usserusser777/xatspace/main/img/foto.png" alt="avatar" />
   <div class="card-main">
     <div class="card-fullname">Fran</div>
     <div class="card-jobtitle">iD xat (1984)</div>
