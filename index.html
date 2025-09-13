@@ -146,14 +146,13 @@ video#bg-video {
 .card-buttons button:hover,
 .card-buttons button.is-active {
   color: #2b2c48;
-  border-bottom: 3px solid #3b82f6;  /* Azul brillante */
+  border-bottom: 3px solid #3b82f6;
   background: linear-gradient(
     to bottom,
-    rgba(59, 130, 246, 0) 0%,     /* azul transparente */
-    rgba(59, 130, 246, 0.2) 44%,  /* azul 20% */
-    rgba(59, 130, 246, 0.4) 100%  /* azul 40% */
+    rgba(59, 130, 246, 0) 0%,
+    rgba(59, 130, 246, 0.2) 44%,
+    rgba(59, 130, 246, 0.4) 100%
   );
-
 }
 
 @keyframes fadeIn {
@@ -184,21 +183,21 @@ video#bg-video {
     <div class="card-section is-active" id="about">
       <div class="card-subtitle">Chileno</div>
       <p class="card-desc mirror" id="mirror-text">
-        Este es tu espejo, lo mismo que piensas de los demás es lo que eres tú como persona y se refleja en ti.
+        Sólo me junto con gente que está a mi nivel. Nunca he necesitado tu aprobación ni la de nadie que no sea de mi círculo.
       </p>
     </div>
 
     <div class="card-section" id="experience">
       <div class="card-subtitle">Chilean</div>
       <p class="card-desc mirror">
-        This is your mirror, what you think of others is who you are as a person and it reflects on you.
+        I only spend time with people who are on my level. I have never needed your approval or that of anyone outside my circle.
       </p>
     </div>
 
     <div class="card-section" id="contact">
       <div class="card-subtitle">تشيلي</div>
       <p class="card-desc mirror" dir="rtl" style="text-align:right;">
-        هذا هو مرآتك، ما تفكر به عن الآخرين هو ما أنت عليه كإنسان، وهو ينعكس عليك.
+        أنا أختلط فقط مع أشخاص على مستواي. لم أحتج يومًا إلى موافقتك ولا إلى موافقة أي شخص خارج دائرتي.
       </p>
     </div>
 
@@ -232,21 +231,19 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Bloquear clic derecho
-  document.addEventListener("contextmenu", function(e) {
-    e.preventDefault();
-  });
+document.addEventListener("contextmenu", function(e) {
+  e.preventDefault();
+});
 
-  // Bloquear teclas comunes de copiado (Ctrl+C, Ctrl+X, Ctrl+U, Ctrl+S, F12, etc.)
-  document.addEventListener("keydown", function(e) {
-    if (
-      (e.ctrlKey && ['c', 'x', 'u', 's', 'p'].includes(e.key.toLowerCase())) || // Ctrl+C/X/U/S/P
-      e.key === "F12" || // Herramientas de desarrollador
-      (e.ctrlKey && e.shiftKey && ['i', 'j'].includes(e.key.toLowerCase())) // Ctrl+Shift+I/J
-    ) {
-      e.preventDefault();
-    }
-  });
+document.addEventListener("keydown", function(e) {
+  if (
+    (e.ctrlKey && ['c', 'x', 'u', 's', 'p'].includes(e.key.toLowerCase())) ||
+    e.key === "F12" ||
+    (e.ctrlKey && e.shiftKey && ['i', 'j'].includes(e.key.toLowerCase()))
+  ) {
+    e.preventDefault();
+  }
+});
 </script>
 
 </body>
