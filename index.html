@@ -64,38 +64,79 @@
       font-size: 18px;
       letter-spacing: 5px;
       outline: none;
+      background: rgba(255, 255, 255, 0.9);
     }
 
-    #login-container button {
+    /* CONTENEDOR DE LA LLAMA AZUL */
+    .fire-wrapper {
+      position: relative;
+      width: fit-content;
+      margin: 25px auto 0;
+      padding: 3px; /* Grosor de la orilla */
+      border-radius: 11px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .fire-wrapper::before {
+      content: '';
+      position: absolute;
+      width: 150%;
+      height: 150%;
+      background: conic-gradient(transparent, #00d2ff, #3b82f6, transparent 30%);
+      animation: rotateFire 2s linear infinite;
+      z-index: 0;
+    }
+
+    /* Efecto de resplandor de la llama */
+    .fire-wrapper::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: conic-gradient(transparent, #00d2ff, #3b82f6, transparent 30%);
+      animation: rotateFire 2s linear infinite;
+      filter: blur(12px);
+      z-index: 0;
+    }
+
+    #login-btn {
+      position: relative;
       display: block;
-      margin: 20px auto 0;
-      padding: 10px 25px;
+      padding: 12px 30px;
       border-radius: 8px;
       border: none;
-      background: #3b82f6;
+      background: #000; /* Fondo negro para que resalte la llama */
       color: white;
       cursor: pointer;
       font-weight: 600;
+      font-family: "Jost", sans-serif;
+      font-size: 15px;
+      z-index: 1;
       transition: 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
-    #login-container button:hover {
-      background: #2563eb;
+    @keyframes rotateFire {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
     #error-msg {
       color: #ff4d4d;
       font-size: 14px;
-      margin-top: 10px;
+      margin-top: 15px;
       display: none;
+      font-weight: 500;
     }
-
 
     #main-site {
       display: none;
     }
 
-
+    /* Estilos de la Tarjeta */
     .card {
       width: 340px;
       height: 450px;
@@ -227,9 +268,12 @@
 
 <div id="login-container">
   <h2>Ingresar PIN</h2>
-  <input type="password" id="pin-input" maxlength="6" placeholder="000000" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
-  <p id="error-msg">Contraseña incorrecta. Inténtalo de nuevo.</p>
-  <button id="login-btn">Acceder</button>
+  <input type="password" id="pin-input" maxlength="4" placeholder="0000" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+  <p id="error-msg">Contraseña incorrecta sapo(a)🐸</p>
+  
+  <div class="fire-wrapper">
+    <button id="login-btn">Acceder</button>
+  </div>
 </div>
 
 <div id="main-site">
@@ -278,14 +322,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const mainSite = document.getElementById("main-site");
   const errorMsg = document.getElementById("error-msg");
 
-
   loginBtn.addEventListener("click", () => {
     var amy = Math.pow(2, 3) - 1; 
     var barbie = Math.sqrt(25 + 24); 
     var candy = Math.abs(50 % 43); 
     var diamond = Math.round(20.4 / 3 + 0.2); 
     var x = "" + amy + barbie + candy + diamond;
-
 
     if (pinInput.value === x) {
       loginContainer.style.display = "none";
@@ -296,11 +338,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-
   pinInput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") loginBtn.click();
   });
-
 
   const buttons = document.querySelectorAll(".card-buttons button");
   const sections = document.querySelectorAll(".card-section");
@@ -319,7 +359,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
-
 
 document.addEventListener("contextmenu", (e) => e.preventDefault());
 document.addEventListener("keydown", (e) => {
