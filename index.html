@@ -90,12 +90,12 @@
       display: none;
     }
 
-    /* Ocultar el sitio inicialmente */
+
     #main-site {
       display: none;
     }
 
-    /* Estilos de la Tarjeta (Tu código original) */
+
     .card {
       width: 340px;
       height: 450px;
@@ -278,15 +278,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const mainSite = document.getElementById("main-site");
   const errorMsg = document.getElementById("error-msg");
 
-  // Manejo del Login
+
   loginBtn.addEventListener("click", () => {
-    var amy = 6+1;
-    var barbie = 299-282-10;
-    var candy = 1984-1142-1138+3;
-    var diamond = 8425-6969-1422-1419+4
-    var emerald = (49 / 7);
-    var x = amy.toString() + barbie.toString() + candy.toString() + diamond.toString();
-    if (x.value === "7777") {
+    var amy = Math.pow(2, 3) - 1; 
+    var barbie = Math.sqrt(25 + 24); 
+    var candy = Math.abs(50 % 43); 
+    var diamond = Math.round(20.4 / 3 + 0.2); 
+    var x = "" + amy + barbie + candy + diamond;
+
+
+    if (pinInput.value === x) {
       loginContainer.style.display = "none";
       mainSite.style.display = "block";
     } else {
@@ -295,12 +296,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Permitir entrar con la tecla Enter
+
   pinInput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") loginBtn.click();
   });
 
-  // Manejo de pestañas original
+
   const buttons = document.querySelectorAll(".card-buttons button");
   const sections = document.querySelectorAll(".card-section");
 
@@ -319,7 +320,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Protecciones originales
+
 document.addEventListener("contextmenu", (e) => e.preventDefault());
 document.addEventListener("keydown", (e) => {
   if (
