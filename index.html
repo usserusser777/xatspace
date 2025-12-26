@@ -1,34 +1,749 @@
-<!DOCTYPE html>
 <html lang="es">
+
 <head>
+
   <meta charset="UTF-8" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sitio Protegido - Fran iD</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+  <title>Fran iD xat (1984)</title>
+
+  <link rel="icon" href="https://raw.githubusercontent.com/usserusser777/xatspace/main/img/icono.ico" type="image/x-icon">
+
   <style>
-    /* Estilos del Login (Siempre visibles) */
-    body { font-family: sans-serif; background: #000; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-    #login-container { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 30px; border-radius: 15px; text-align: center; border: 1px solid rgba(255,255,255,0.2); }
-    input { padding: 12px; font-size: 1.2rem; width: 120px; text-align: center; border-radius: 8px; border: none; margin-bottom: 20px; outline: none; }
-    button { padding: 12px 30px; cursor: pointer; background: #3b82f6; border: none; color: white; border-radius: 8px; font-weight: bold; text-transform: uppercase; }
-    #error-msg { color: #ff4d4d; display: none; margin-top: 10px; }
-    
-    /* El sitio principal empieza vacío y oculto */
-    #main-site { display: none; width: 100%; height: 100%; }
+
+    @import url("https://fonts.googleapis.com/css?family=DM+Sans:400,500|Jost:400,500,600&display=swap");
+
+
+
+    * {
+
+      box-sizing: border-box;
+
+      -webkit-user-select: none;
+
+      -moz-user-select: none;
+
+      -ms-user-select: none;
+
+      user-select: none;
+
+    }
+
+    body {
+
+      font-family: "Jost", sans-serif;
+
+      margin: 0;
+
+      padding: 0;
+
+      background: #000;
+
+      min-height: 100vh;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      overflow: hidden;
+
+    }
+
+
+
+    video#bg-video {
+
+      position: fixed;
+
+      top: 0;
+
+      left: 0;
+
+      width: 100%;
+
+      height: 100%;
+
+      object-fit: cover;
+
+      z-index: -1;
+
+      pointer-events: none;
+
+    }
+
+
+
+    /* Estilos del Login */
+
+    #login-container {
+
+      background: rgba(255, 255, 255, 0.1);
+
+      backdrop-filter: blur(10px);
+
+      padding: 30px;
+
+      border-radius: 15px;
+
+      text-align: center;
+
+      border: 1px solid rgba(255, 255, 255, 0.2);
+
+      z-index: 10;
+
+    }
+
+
+
+    #login-container h2 {
+
+      color: white;
+
+      margin-bottom: 20px;
+
+      font-weight: 500;
+
+    }
+
+
+
+    #login-container input {
+
+      padding: 12px;
+
+      border-radius: 8px;
+
+      border: none;
+
+      width: 200px;
+
+      text-align: center;
+
+      font-size: 18px;
+
+      letter-spacing: 5px;
+
+      outline: none;
+
+      background: rgba(255, 255, 255, 0.9);
+
+    }
+
+
+
+    /* CONTENEDOR DE LA LLAMA AZUL */
+
+    .fire-wrapper {
+
+      position: relative;
+
+      width: fit-content;
+
+      margin: 25px auto 0;
+
+      padding: 3px; /* Grosor de la orilla */
+
+      border-radius: 11px;
+
+      overflow: hidden;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+    }
+
+
+
+    .fire-wrapper::before {
+
+      content: '';
+
+      position: absolute;
+
+      width: 150%;
+
+      height: 150%;
+
+      background: conic-gradient(transparent, #00d2ff, #3b82f6, transparent 30%);
+
+      animation: rotateFire 2s linear infinite;
+
+      z-index: 0;
+
+    }
+
+
+
+    /* Efecto de resplandor de la llama */
+
+    .fire-wrapper::after {
+
+      content: '';
+
+      position: absolute;
+
+      inset: 0;
+
+      background: conic-gradient(transparent, #00d2ff, #3b82f6, transparent 30%);
+
+      animation: rotateFire 2s linear infinite;
+
+      filter: blur(12px);
+
+      z-index: 0;
+
+    }
+
+
+
+    #login-btn {
+
+      position: relative;
+
+      display: block;
+
+      padding: 12px 30px;
+
+      border-radius: 8px;
+
+      border: none;
+
+      background: #000; /* Fondo negro para que resalte la llama */
+
+      color: white;
+
+      cursor: pointer;
+
+      font-weight: 600;
+
+      font-family: "Jost", sans-serif;
+
+      font-size: 15px;
+
+      z-index: 1;
+
+      transition: 0.3s;
+
+      text-transform: uppercase;
+
+      letter-spacing: 1px;
+
+    }
+
+
+
+    @keyframes rotateFire {
+
+      from { transform: rotate(0deg); }
+
+      to { transform: rotate(360deg); }
+
+    }
+
+
+
+    #error-msg {
+
+      color: #ff4d4d;
+
+      font-size: 14px;
+
+      margin-top: 15px;
+
+      display: none;
+
+      font-weight: 500;
+
+    }
+
+
+
+    #main-site {
+
+      display: none;
+
+    }
+
+
+
+    /* Estilos de la Tarjeta */
+
+    .card {
+
+      width: 340px;
+
+      height: 450px;
+
+      background: white;
+
+      border-radius: 12px;
+
+      overflow: hidden;
+
+      box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.15);
+
+      display: flex;
+
+      flex-direction: column;
+
+      position: relative;
+
+    }
+
+
+
+    .card-header {
+
+      position: relative;
+
+      height: 140px;
+
+      background-image: url('https://cdn.pixabay.com/photo/2017/08/01/08/07/sea-2563389_1280.jpg');
+
+      background-size: cover;
+
+      background-position: center;
+
+      filter: blur(25px);
+
+    }
+
+
+
+    .card-avatar {
+
+      width: 100px;
+
+      height: 100px;
+
+      border-radius: 50%;
+
+      object-fit: cover;
+
+      position: absolute;
+
+      top: 90px;
+
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+
+      z-index: 2;
+
+      background: white;
+
+      padding: 3px;
+
+    }
+
+
+
+    .card-main {
+
+      flex: 1;
+
+      padding-top: 70px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: space-between;
+
+      overflow: hidden;
+
+    }
+
+
+
+    .card-fullname {
+
+      text-align: center;
+
+      font-size: 20px;
+
+      font-weight: bold;
+
+      margin: 10px 0 0 0;
+
+    }
+
+
+
+    .card-jobtitle {
+
+      text-align: center;
+
+      font-size: 12px;
+
+      opacity: 0.6;
+
+      margin-bottom: 10px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 1px;
+
+    }
+
+
+
+    .card-section {
+
+      display: none;
+
+      padding: 0 20px;
+
+    }
+
+    .card-section.is-active {
+
+      display: block;
+
+      animation: fadeIn 0.6s both;
+
+    }
+
+
+
+    .card-subtitle {
+
+      font-weight: 700;
+
+      font-size: 13px;
+
+      margin-bottom: 8px;
+
+    }
+
+
+
+    .card-desc {
+
+      line-height: 1.6;
+
+      color: #636b6f;
+
+      font-size: 14px;
+
+      margin: 0;
+
+      font-weight: 400;
+
+      font-family: "DM Sans", sans-serif;
+
+    }
+
+
+
+    .card-buttons {
+
+      display: flex;
+
+      background-color: #fff;
+
+      border-top: 1px solid #eee;
+
+    }
+
+
+
+    .card-buttons button {
+
+      flex: 1;
+
+      padding: 15px;
+
+      background: none;
+
+      border: none;
+
+      cursor: pointer;
+
+      font-family: "Jost", sans-serif;
+
+      font-size: 13px;
+
+      font-weight: 500;
+
+      color: #5c5c6d;
+
+      transition: 0.3s;
+
+      border-bottom: 3px solid transparent;
+
+    }
+
+
+
+    .card-buttons button:hover,
+
+    .card-buttons button.is-active {
+
+      color: #2b2c48;
+
+      border-bottom: 3px solid #3b82f6;
+
+      background: linear-gradient(
+
+        to bottom,
+
+        rgba(59, 130, 246, 0) 0%,
+
+        rgba(59, 130, 246, 0.2) 44%,
+
+        rgba(59, 130, 246, 0.4) 100%
+
+      );
+
+    }
+
+
+
+    @keyframes fadeIn {
+
+      from { opacity: 0; transform: translateY(40px); }
+
+      to { opacity: 1; transform: none; }
+
+    }
+
   </style>
+
 </head>
+
 <body>
 
-  <div id="login-container">
-    <h2>Acceso Encriptado</h2>
-    <input type="password" id="pin-input" maxlength="4" placeholder="PIN">
-    <div id="error-msg">PIN Incorrecto sapo(a)🐸</div>
-    <br>
-    <button id="unlock-btn">Acceder</button>
+
+
+<video autoplay muted loop playsinline id="bg-video">
+
+  <source src="https://cdn.pixabay.com/video/2024/05/05/210824_large.mp4" type="video/mp4">
+
+</video>
+
+
+
+<div id="login-container">
+
+  <h2>Ingresar PIN</h2>
+
+  <input type="password" id="pin-input" maxlength="4" placeholder="0000" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+
+  <p id="error-msg">Contraseña incorrecta sapo(a)🐸</p>
+
+  
+
+  <div class="fire-wrapper">
+
+    <button id="login-btn">Acceder</button>
+
   </div>
 
-  <div id="main-site"></div>
+</div>
 
-  <script>
 
-const DATA = "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"
+
+<div id="main-site">
+
+  <div class="card" data-state="#about">
+
+    <div class="card-header"></div>
+
+    <img class="card-avatar" src="img/snorlax.gif" alt="avatar" />
+
+    <div class="card-main">
+
+      <div class="card-fullname">Fran</div>
+
+      <div class="card-jobtitle">iD xat (1984)</div>
+
+
+
+      <div class="card-section is-active" id="about">
+
+        <div class="card-subtitle">Chileno</div>
+
+        <p class="card-desc mirror" id="mirror-text">
+
+          Prefiero compartir mi tiempo con personas con quienes me siento en sintonía. Si no contesto, es porque no me llamas la atención.
+
+        </p>
+
+      </div>
+
+
+
+      <div class="card-section" id="experience">
+
+        <div class="card-subtitle">Chilean</div>
+
+        <p class="card-desc mirror">
+
+          I like spending time with people I connect with. If I don’t reply, it’s because you don’t catch my attention.
+
+        </p>
+
+      </div>
+
+
+
+      <div class="card-section" id="contact">
+
+        <div class="card-subtitle">تشيلي</div>
+
+        <p class="card-desc mirror" dir="rtl" style="text-align:right;">
+
+          أحب قضاء الوقت مع أشخاص أشعر بالانسجام معهم. إذا لم أجب، فذلك لأنك لا تلفت انتباهي.
+
+        </p>
+
+      </div>
+
+
+
+      <div class="card-buttons">
+
+        <button class="is-active" data-section="#about">ESPAÑOL</button>
+
+        <button data-section="#experience">ENGLISH</button>
+
+        <button data-section="#contact">ARABIC</button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const loginBtn = document.getElementById("login-btn");
+
+  const pinInput = document.getElementById("pin-input");
+
+  const loginContainer = document.getElementById("login-container");
+
+  const mainSite = document.getElementById("main-site");
+
+  const errorMsg = document.getElementById("error-msg");
+
+
+
+  loginBtn.addEventListener("click", () => {
+
+    var amy = Math.pow(2, 3) - 1; 
+
+    var barbie = Math.sqrt(25 + 24); 
+
+    var candy = Math.abs(50 % 43); 
+
+    var diamond = Math.round(20.4 / 3 + 0.2); 
+
+    var x = "" + amy + barbie + candy + diamond;
+
+
+
+    if (pinInput.value === x) {
+
+      loginContainer.style.display = "none";
+
+      mainSite.style.display = "block";
+
+    } else {
+
+      errorMsg.style.display = "block";
+
+      pinInput.value = "";
+
+    }
+
+  });
+
+
+
+  pinInput.addEventListener("keypress", (e) => {
+
+    if (e.key === "Enter") loginBtn.click();
+
+  });
+
+
+
+  const buttons = document.querySelectorAll(".card-buttons button");
+
+  const sections = document.querySelectorAll(".card-section");
+
+
+
+  buttons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      const sectionId = button.getAttribute("data-section");
+
+      buttons.forEach(b => b.classList.remove("is-active"));
+
+      button.classList.add("is-active");
+
+      sections.forEach(section => {
+
+        section.classList.remove("is-active");
+
+        if (section.id === sectionId.replace("#", "")) {
+
+          section.classList.add("is-active");
+
+        }
+
+      });
+
+    });
+
+  });
+
+});
+
+
+
+document.addEventListener("contextmenu", (e) => e.preventDefault());
+
+document.addEventListener("keydown", (e) => {
+
+  if (
+
+    (e.ctrlKey && ['c', 'x', 'u', 's', 'p'].includes(e.key.toLowerCase())) ||
+
+    e.key === "F12" ||
+
+    (e.ctrlKey && e.shiftKey && ['i', 'j'].includes(e.key.toLowerCase()))
+
+  ) {
+
+    e.preventDefault();
+
+  }
+
+});
+
+</script>
+
+
+
+</body>
+
+</html>
