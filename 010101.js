@@ -14,9 +14,11 @@ document.addEventListener("DOMContentLoaded", () => {
       if (pinInput.value === res) {
           loginContainer.style.display = "none";
           mainSite.style.display = "block";
+          console.log("Ok, intento: ", res);
       } else {
           errorMsg.style.display = "block";
           pinInput.value = "";
+          console.log("Mal, intento: ", res);
       }
   });
   pinInput.addEventListener("keypress", (e) => {if (e.key === "Enter") loginBtn.click();});
