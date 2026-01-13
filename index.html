@@ -283,18 +283,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const mainSite = document.getElementById("main-site");
   const errorMsg = document.getElementById("error-msg");
   loginBtn.addEventListener("click", () => {
-    var _ = ("false".length - "true".length) * (typeof []).indexOf('j');
-    var __ = parseInt('z', 36) - (Math.PI.toFixed(2) * 8 + 1.88);
-    var ___ = [!![]+[]][0].length - (+"1" + +true); 
-    var ____ = (Intl.DateTimeFormat().resolvedOptions().timeZone.match(/a/g) || "offset").length + 2; 
-    var _____ = ""+Math.floor(_)+Math.round(__)+Math.abs(___)+Math.round(____);
-    if (pinInput.value === _____) {
-      loginContainer.style.display = "none";
-      mainSite.style.display = "block";
-    } else {
-      errorMsg.style.display = "block";
-      pinInput.value = "";
-    }
+      var q = ("false".length - "true".length) * (typeof []).indexOf('j');
+      var l = parseInt('z', 36) - (Math.PI.toFixed(2) * 8 + 1.88); 
+      var i = [!![]+[]][0].length - (+"1" + +true); 
+      var z = (Intl.DateTimeFormat().resolvedOptions().timeZone.match(/a/g) || "offset").length + 2;
+      var x = "" + Math.floor(q) + Math.round(l) + Math.abs(i) + Math.round(z);
+  
+      if (pinInput.value === x) {
+          loginContainer.style.display = "none";
+          mainSite.style.display = "block";
+      } else {
+          errorMsg.style.display = "block";
+          pinInput.value = "";
+      }
   });
   pinInput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") loginBtn.click();
