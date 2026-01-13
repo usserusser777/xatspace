@@ -1,44 +1,30 @@
+document.addEventListener("DOMContentLoaded", async () => {
 
-document.addEventListener("DOMContentLoaded", () => {
   const loginBtn = document.getElementById("login-btn");
   const pinInput = document.getElementById("pin-input");
   const loginContainer = document.getElementById("login-container");
   const mainSite = document.getElementById("main-site");
   const errorMsg = document.getElementById("error-msg");
-  loginBtn.addEventListener("click", () => {
-      var _0x1 = (!![] + [])[+!+[]].length + 5; 
-      var _0x2 = (typeof NaN)[0].length + 3; 
-      var _0x3 = ([![]]+[][[]])[+!+[]+[+[]]].length - 7; 
-      var _0x4 = (+(+!+[] + (+!+[] + (+!+[] + (+!+[] + (+!+[] + [])))))) + 1; 
-      var res = "" + _0x1 + _0x2 + _0x3 + _0x4;
-      if (pinInput.value === res) {
-          loginContainer.style.display = "none";
-          mainSite.style.display = "block";
-          console.log("Ok, intento: ", res);
-      } else {
-          errorMsg.style.display = "block";
-          pinInput.value = "";
-          console.log("Mal, intento: ", res);
-      }
-  });
-  pinInput.addEventListener("keypress", (e) => {if (e.key === "Enter") loginBtn.click();});
-  const buttons = document.querySelectorAll(".card-buttons button");
-  const sections = document.querySelectorAll(".card-section");
-  buttons.forEach(button => {
-    button.addEventListener("click", () => {
-      const sectionId = button.getAttribute("data-section");
-      buttons.forEach(b => b.classList.remove("is-active"));
-      button.classList.add("is-active");
-      sections.forEach(section => {
-        section.classList.remove("is-active");
-        if (section.id === sectionId.replace("#", "")) {section.classList.add("is-active");}
-      });
-    });
-  });
-});
-document.addEventListener("contextmenu", (e) => e.preventDefault());
-document.addEventListener("keydown", (e) => {
-  if ((e.ctrlKey && ['c', 'x', 'u', 's', 'p'].includes(e.key.toLowerCase())) || e.key === "F12" || (e.ctrlKey && e.shiftKey && ['i', 'j'].includes(e.key.toLowerCase()))) {
-    e.preventDefault();
+
+  // HASH SHA-256 del PIN 8426
+  const PIN_HASH = "1c8e32d71b0127bc49eec30f72c6c7f17fda5f9cf7f0c9b55d0c5d2b9bb7f04f";
+
+  async function sha256(text) {
+    const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
   }
+
+  loginBtn.addEventListener("click", async () => {
+    const input = pinInput.value.trim();
+    const inputHash = await sha256(input);
+
+    if (inputHash === PIN_HASH) {
+      loginContainer.style.display = "none";
+      mainSite.style.display = "block";
+    } else {
+      errorMsg.style.display = "block";
+      pinInput.value = "";
+    }
+  });
+
 });
