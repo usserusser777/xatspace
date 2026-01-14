@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const mainSite = document.getElementById("main-site");
   const errorMsg = document.getElementById("error-msg");
 
-  const PIN_HASH = "1c8e32d71b0127bc49eec30f72c6c7f17fda5f9cf7f0c9b55d0c5d2b9bb7f04f";
+  const PIN_HASH = "e78dcd2ab23bdc60f1f97aced1140b43d2cc47daee343654dc53e8672c74b1f5";
 
   async function sha256(text) {
     const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
