@@ -37,6 +37,7 @@
       text-align: center;
       border: 1px solid rgba(255, 255, 255, 0.2);
       z-index: 10;
+      width: 280px;
     }
 
     #login-container h2 {color: white; margin-bottom: 20px; font-weight: 500;}
@@ -45,25 +46,53 @@
       padding: 12px;
       border-radius: 8px;
       border: none;
-      width: 200px;
+      width: 100%;
       text-align: center;
-      font-size: 18px;
-      letter-spacing: 5px;
+      font-size: 22px;
+      letter-spacing: 8px;
       outline: none;
       background: rgba(255, 255, 255, 0.9);
       color: #333;
+      margin-bottom: 20px;
+    }
+
+    /* ESTILOS DEL DIGITADOR (NUMPAD) */
+    .numpad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .num-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 15px;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .num-btn:active {
+      background: rgba(255, 255, 255, 0.4);
+      transform: scale(0.95);
+    }
+
+    .num-btn.clear {
+      background: rgba(255, 77, 77, 0.2);
+      color: #ff4d4d;
     }
 
     .fire-wrapper {
       position: relative;
-      width: fit-content;
-      margin: 25px auto 0;
+      width: 100%;
+      margin: 0 auto;
       padding: 3px;
       border-radius: 11px;
       overflow: hidden;
       display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
     .fire-wrapper::before {
@@ -72,12 +101,13 @@
       background: conic-gradient(transparent, #00d2ff, #3b82f6, transparent 30%);
       animation: rotateFire 2s linear infinite;
       z-index: 0;
+      left: -25%; top: -25%;
     }
 
     #login-btn {
       position: relative;
-      display: block;
-      padding: 12px 30px;
+      width: 100%;
+      padding: 12px;
       border-radius: 8px;
       border: none;
       background: #000;
@@ -86,7 +116,6 @@
       font-weight: 600;
       font-size: 15px;
       z-index: 1;
-      transition: 0.3s;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
@@ -106,6 +135,7 @@
 
     #main-site { display: none; z-index: 20; }
 
+    /* Estilos de la Tarjeta (Sin cambios significativos) */
     .card {
       width: 340px; height: 450px;
       background: white;
@@ -145,7 +175,6 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      overflow: hidden;
     }
 
     .card-fullname { text-align: center; font-size: 20px; font-weight: bold; margin: 10px 0 0 0; color: #333; }
@@ -189,11 +218,27 @@
 
 <div id="login-container">
   <h2>Ingresar PIN</h2>
-  <input type="password" id="pin-input" maxlength="4" placeholder="****">
-  <p id="error-msg">Contraseña incorrecta sapo(a)🐸</p>
+  <input type="password" id="pin-input" maxlength="4" placeholder="****" readonly>
+  
+  <div class="numpad">
+    <button class="num-btn" onclick="addNumber('1')">1</button>
+    <button class="num-btn" onclick="addNumber('2')">2</button>
+    <button class="num-btn" onclick="addNumber('3')">3</button>
+    <button class="num-btn" onclick="addNumber('4')">4</button>
+    <button class="num-btn" onclick="addNumber('5')">5</button>
+    <button class="num-btn" onclick="addNumber('6')">6</button>
+    <button class="num-btn" onclick="addNumber('7')">7</button>
+    <button class="num-btn" onclick="addNumber('8')">8</button>
+    <button class="num-btn" onclick="addNumber('9')">9</button>
+    <button class="num-btn clear" onclick="clearPin()">C</button>
+    <button class="num-btn" onclick="addNumber('0')">0</button>
+    <button class="num-btn clear" onclick="deleteLast()">⌫</button>
+  </div>
+
   <div class="fire-wrapper">
     <button id="login-btn">Acceder</button>
   </div>
+  <p id="error-msg">Contraseña incorrecta sapo(a) 🐸</p>
 </div>
 
 <div id="main-site">
@@ -235,14 +280,30 @@
   const w = (((550000 * 4) + 1100000) / 660000); 
 
   const _x = Math.round(n).toString() + 
-                       Math.round(j).toString() + 
-                       Math.round(k).toString() + 
-                       Math.round(w).toString();
+             Math.round(j).toString() + 
+             Math.round(k).toString() + 
+             Math.round(w).toString();
+
   const loginBtn = document.getElementById("login-btn");
   const pinInput = document.getElementById("pin-input");
   const loginContainer = document.getElementById("login-container");
   const mainSite = document.getElementById("main-site");
   const errorMsg = document.getElementById("error-msg");
+
+  function addNumber(num) {
+    if (pinInput.value.length < 4) {
+      pinInput.value += num;
+      errorMsg.style.display = "none";
+    }
+  }
+
+  function clearPin() {
+    pinInput.value = "";
+  }
+
+  function deleteLast() {
+    pinInput.value = pinInput.value.slice(0, -1);
+  }
 
   loginBtn.addEventListener("click", () => {
     if (pinInput.value === _x) {
@@ -252,10 +313,6 @@
       errorMsg.style.display = "block";
       pinInput.value = "";
     }
-  });
-
-  pinInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") loginBtn.click();
   });
 
   function showSection(sectionId, btn) {
