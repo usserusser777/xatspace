@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -6,74 +7,268 @@
   <link rel="icon" href="https://raw.githubusercontent.com/usserusser777/xatspace/main/img/icono.ico" type="image/x-icon">
   <style>
     @import url("https://fonts.googleapis.com/css?family=DM+Sans:400,500|Jost:400,500,600&display=swap");
-    * {box-sizing: border-box;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}
-    body {font-family: "Jost", sans-serif;margin: 0;padding: 0;background: #000;min-height: 100vh;display: flex;align-items: center;justify-content: center;overflow: hidden;}
-    video#bg-video {position: fixed;top: 0;left: 0;width: 100%;height: 100%;object-fit: cover;z-index: -1;pointer-events: none;}
-    #login-container {background: rgba(255, 255, 255, 0.1);backdrop-filter: blur(10px);padding: 30px;border-radius: 15px;text-align: center;border: 1px solid rgba(255, 255, 255, 0.2);z-index: 10;}
-    #login-container h2 {color: white;margin-bottom: 20px;font-weight: 500;}
-    #login-container input {padding: 12px;border-radius: 8px;border: none;width: 200px;text-align: center;font-size: 18px;letter-spacing: 5px;outline: none;background: rgba(255, 255, 255, 0.9);}
-    .fire-wrapper {position: relative;width: fit-content;margin: 25px auto 0;padding: 3px;border-radius: 11px;overflow: hidden;display: flex;align-items: center;justify-content: center;}
-    .fire-wrapper::before {content: '';position: absolute;width: 150%;height: 150%;background: conic-gradient(transparent, #00d2ff, #3b82f6, transparent 30%);animation: rotateFire 2s linear infinite;z-index: 0;}
-    .fire-wrapper::after {content: '';position: absolute;inset: 0;background: conic-gradient(transparent, #00d2ff, #3b82f6, transparent 30%);animation: rotateFire 2s linear infinite;filter: blur(12px);z-index: 0;}
-    #login-btn {position: relative;display: block;padding: 12px 30px;border-radius: 8px;border: none;background: #000;color: white;cursor: pointer;font-weight: 600;font-family: "Jost", sans-serif;font-size: 15px;z-index: 1;transition: 0.3s;text-transform: uppercase;letter-spacing: 1px;}
-    @keyframes rotateFire {from { transform: rotate(0deg); }to { transform: rotate(360deg); }}
-    #error-msg {color: #ff4d4d;font-size: 14px;margin-top: 15px;display: none;font-weight: 500;}
-    #main-site {display: none;}
-    .card {width: 340px;height: 450px;background: white;border-radius: 12px;overflow: hidden;box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.15);display: flex;flex-direction: column;position: relative;}
-    .card-header {position: relative;height: 140px;background-image: url('https://cdn.pixabay.com/photo/2017/08/01/08/07/sea-2563389_1280.jpg');background-size: cover;background-position: center;filter: blur(25px);}
-    .card-avatar {width: 100px;height: 100px;border-radius: 50%;object-fit: cover;position: absolute;top: 90px;left: 50%;transform: translateX(-50%);box-shadow: 0 4px 10px rgba(0,0,0,0.3);z-index: 2;background: white;padding: 3px;}
-    .card-main {flex: 1;padding-top: 70px;display: flex;flex-direction: column;justify-content: space-between;overflow: hidden;}
-    .card-fullname {text-align: center;font-size: 20px;font-weight: bold;margin: 10px 0 0 0;}
-    .card-jobtitle {text-align: center;font-size: 12px;opacity: 0.6;margin-bottom: 10px;text-transform: uppercase;letter-spacing: 1px;}
-    .card-section {display: none;padding: 0 20px;}
-    .card-section.is-active {display: block;animation: fadeIn 0.6s both;}
-    .card-subtitle {font-weight: 700;font-size: 13px;margin-bottom: 8px;}
-    .card-desc {line-height: 1.6;color: #636b6f;font-size: 14px;margin: 0;font-weight: 400;font-family: "DM Sans", sans-serif;}
-    .card-buttons {display: flex;background-color: #fff;border-top: 1px solid #eee;}
-    .card-buttons button {flex: 1;padding: 15px;background: none;border: none;cursor: pointer;font-family: "Jost", sans-serif;font-size: 13px;font-weight: 500;color: #5c5c6d;transition: 0.3s;border-bottom: 3px solid transparent;}
-    .card-buttons button:hover,.card-buttons button.is-active {color: #2b2c48;border-bottom: 3px solid #3b82f6;background: linear-gradient(to bottom,rgba(59, 130, 246, 0) 0%,rgba(59, 130, 246, 0.2) 44%,rgba(59, 130, 246, 0.4) 100%);}
-    @keyframes fadeIn {from { opacity: 0; transform: translateY(40px); }to { opacity: 1; transform: none; }}
+    
+    * {box-sizing: border-box; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
+    
+    body {
+      font-family: "Jost", sans-serif;
+      margin: 0; padding: 0;
+      background: #000;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    video#bg-video {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    #login-container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      z-index: 10;
+    }
+
+    #login-container h2 {color: white; margin-bottom: 20px; font-weight: 500;}
+
+    #login-container input {
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      width: 200px;
+      text-align: center;
+      font-size: 18px;
+      letter-spacing: 5px;
+      outline: none;
+      background: rgba(255, 255, 255, 0.9);
+      color: #333;
+    }
+
+    .fire-wrapper {
+      position: relative;
+      width: fit-content;
+      margin: 25px auto 0;
+      padding: 3px;
+      border-radius: 11px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .fire-wrapper::before {
+      content: ''; position: absolute;
+      width: 150%; height: 150%;
+      background: conic-gradient(transparent, #00d2ff, #3b82f6, transparent 30%);
+      animation: rotateFire 2s linear infinite;
+      z-index: 0;
+    }
+
+    #login-btn {
+      position: relative;
+      display: block;
+      padding: 12px 30px;
+      border-radius: 8px;
+      border: none;
+      background: #000;
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 15px;
+      z-index: 1;
+      transition: 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    @keyframes rotateFire {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    #error-msg {
+      color: #ff4d4d;
+      font-size: 14px;
+      margin-top: 15px;
+      display: none;
+      font-weight: 500;
+    }
+
+    #main-site { display: none; z-index: 20; }
+
+    .card {
+      width: 340px; height: 450px;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.15);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .card-header {
+      position: relative;
+      height: 140px;
+      background-image: url('https://cdn.pixabay.com/photo/2017/08/01/08/07/sea-2563389_1280.jpg');
+      background-size: cover;
+      background-position: center;
+      filter: blur(25px);
+    }
+
+    .card-avatar {
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      position: absolute;
+      top: 90px; left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      z-index: 2;
+      background: white;
+      padding: 3px;
+    }
+
+    .card-main {
+      flex: 1;
+      padding-top: 70px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    .card-fullname { text-align: center; font-size: 20px; font-weight: bold; margin: 10px 0 0 0; color: #333; }
+    .card-jobtitle { text-align: center; font-size: 12px; opacity: 0.6; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; color: #333; }
+
+    .card-section { display: none; padding: 0 20px; }
+    .card-section.is-active { display: block; animation: fadeIn 0.6s both; }
+
+    .card-subtitle { font-weight: 700; font-size: 13px; margin-bottom: 8px; color: #333; }
+    .card-desc { line-height: 1.6; color: #636b6f; font-size: 14px; margin: 0; font-weight: 400; font-family: "DM Sans", sans-serif; }
+
+    .card-buttons { display: flex; background-color: #fff; border-top: 1px solid #eee; }
+    .card-buttons button {
+      flex: 1; padding: 15px;
+      background: none; border: none;
+      cursor: pointer;
+      font-family: "Jost", sans-serif;
+      font-size: 13px; font-weight: 500;
+      color: #5c5c6d;
+      transition: 0.3s;
+      border-bottom: 3px solid transparent;
+    }
+
+    .card-buttons button.is-active {
+      color: #2b2c48;
+      border-bottom: 3px solid #3b82f6;
+      background: linear-gradient(to bottom, rgba(59, 130, 246, 0) 0%, rgba(59, 130, 246, 0.1) 100%);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: none; }
+    }
   </style>
 </head>
 <body>
+
 <video autoplay muted loop playsinline id="bg-video">
   <source src="https://cdn.pixabay.com/video/2024/05/05/210824_large.mp4" type="video/mp4">
 </video>
+
 <div id="login-container">
   <h2>Ingresar PIN</h2>
-  <input type="password" id="pin-input" maxlength="4" placeholder="0000" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+  <input type="password" id="pin-input" maxlength="4" placeholder="****">
   <p id="error-msg">Contraseña incorrecta sapo(a)🐸</p>
   <div class="fire-wrapper">
     <button id="login-btn">Acceder</button>
   </div>
 </div>
+
 <div id="main-site">
-  <div class="card" data-state="#about">
+  <div class="card">
     <div class="card-header"></div>
     <img class="card-avatar" src="https://media.tenor.com/cb-inJNtsd4AAAAM/anime.gif" alt="avatar" />
     <div class="card-main">
       <div class="card-fullname">Fran</div>
       <div class="card-jobtitle">iD xat (1984)</div>
+
       <div class="card-section is-active" id="about">
         <div class="card-subtitle">Chileno</div>
-        <p class="card-desc mirror" id="mirror-text">Prefiero compartir mi tiempo con personas con quienes me siento en sintonía. Si no contesto, es porque no me llamas la atención.</p>
+        <p class="card-desc">Prefiero compartir mi tiempo con personas con quienes me siento en sintonía. Si no contesto, es porque no me llamas la atención.</p>
       </div>
+
       <div class="card-section" id="experience">
         <div class="card-subtitle">Chilean</div>
-        <p class="card-desc mirror">I like spending time with people I connect with. If I don’t reply, it’s because you don’t catch my attention.</p>
+        <p class="card-desc">I like spending time with people I connect with. If I don’t reply, it’s because you don’t catch my attention.</p>
       </div>
+
       <div class="card-section" id="contact">
         <div class="card-subtitle">تشيلي</div>
-        <p class="card-desc mirror" dir="rtl" style="text-align:right;">أحب قضاء الوقت مع أشخاص أشعر بالانسجام معهم. إذا لم أجب، فذلك لأنك لا تلفت انتباهي.</p>
+        <p class="card-desc" dir="rtl" style="text-align:right;">أحب قضاء الوقت مع أشخاص أشعر بالانسجام معهم. إذا لم أجب، فذلك لأنك لا تلفت انتباهي.</p>
       </div>
+
       <div class="card-buttons">
-        <button class="is-active" data-section="#about">ESPAÑOL</button>
-        <button data-section="#experience">ENGLISH</button>
-        <button data-section="#contact">ARABIC</button>
+        <button class="is-active" onclick="showSection('about', this)">ESPAÑOL</button>
+        <button onclick="showSection('experience', this)">ENGLISH</button>
+        <button onclick="showSection('contact', this)">ARABIC</button>
       </div>
     </div>
   </div>
 </div>
-<script src="https://cdn.jsdelivr.net/gh/usserusser777/xatspace/010101.js"></script>
+
+<script>
+  const n = (((550000 * 2) + 980000) / 260000) - (550000 / 550000); 
+  const j = (((550000 * 4) + 1100000) / 330000) - (550000 / 550000); 
+  const k = (((550000 * 2) + 450000) / 1450000) - ((550000 * 3) / 1650000); 
+  const w = (((550000 * 4) + 1100000) / 660000); 
+
+  const _x = Math.round(n).toString() + 
+                       Math.round(j).toString() + 
+                       Math.round(k).toString() + 
+                       Math.round(w).toString();
+  const loginBtn = document.getElementById("login-btn");
+  const pinInput = document.getElementById("pin-input");
+  const loginContainer = document.getElementById("login-container");
+  const mainSite = document.getElementById("main-site");
+  const errorMsg = document.getElementById("error-msg");
+
+  loginBtn.addEventListener("click", () => {
+    if (pinInput.value === _x) {
+      loginContainer.style.display = "none";
+      mainSite.style.display = "block";
+    } else {
+      errorMsg.style.display = "block";
+      pinInput.value = "";
+    }
+  });
+
+  pinInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") loginBtn.click();
+  });
+
+  function showSection(sectionId, btn) {
+    document.querySelectorAll('.card-section').forEach(section => {
+      section.classList.remove('is-active');
+    });
+    document.querySelectorAll('.card-buttons button').forEach(button => {
+      button.classList.remove('is-active');
+    });
+    document.getElementById(sectionId).classList.add('is-active');
+    btn.classList.add('is-active');
+  }
+</script>
+
 </body>
 </html>
