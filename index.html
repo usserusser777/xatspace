@@ -1,331 +1,665 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fran iD xat (1984)</title>
-  <link rel="icon" href="https://raw.githubusercontent.com/usserusser777/xatspace/main/img/icono.ico" type="image/x-icon">
-  <style>
-    @import url("https://fonts.googleapis.com/css?family=DM+Sans:400,500|Jost:400,500,600&display=swap");
-    
-    * {box-sizing: border-box; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
-    
-    body {
-      font-family: "Jost", sans-serif;
-      margin: 0; padding: 0;
-      background: #000;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Franco</title>
 
-    video#bg-video {
-      position: fixed; top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      z-index: -1;
-      pointer-events: none;
-    }
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Eater&family=Oswald:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
-    #login-container {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      padding: 30px;
-      border-radius: 15px;
-      text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      z-index: 10;
-      width: 280px;
-    }
+    <script>
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('dragstart', e => e.preventDefault());
+        document.addEventListener('selectstart', e => e.preventDefault());
 
-    #login-container h2 {color: white; margin-bottom: 20px; font-weight: 500;}
+        document.onkeydown = function(e) {
+            if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) || (e.ctrlKey && (e.keyCode == 85 || e.keyCode == 83 || e.keyCode == 80 || e.keyCode == 65 || e.keyCode == 67 || e.keyCode == 86))) {
+                return false
+            }
+        };
 
-    #login-container input {
-      padding: 12px;
-      border-radius: 8px;
-      border: none;
-      width: 100%;
-      text-align: center;
-      font-size: 22px;
-      letter-spacing: 8px;
-      outline: none;
-      background: rgba(255, 255, 255, 0.9);
-      color: #333;
-      margin-bottom: 20px;
-    }
+        window.addEventListener('keydown', function(e) {
+            if (e.key === 'PrintScreen') {
+                navigator.clipboard.writeText('');
+                alert('Screenshots disabled');
+            }
+        });
+    </script>
 
-    /* ESTILOS DEL DIGITADOR (NUMPAD) */
-    .numpad {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 20px;
-    }
+    <style>
+        :root {
+            --bg-decay: #0a0808;
+            --text-bone: #cbbba0;
+            --blood-dry: #4a0a0a;
+            --blood-fresh: #8a0e0e;
+            --zombie-flesh: #5a6650;
+            --metal-dirty: #5a5a5a
+        }
 
-    .num-btn {
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: white;
-      padding: 5px;
-      font-size: 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
+        body {
+            background-color: var(--bg-decay);
+            color: var(--text-bone);
+            font-family: 'Oswald', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            user-select: none;
+            -webkit-user-select: none
+        }
 
-    .num-btn:active {
-      background: rgba(255, 255, 255, 0.4);
-      transform: scale(0.95);
-    }
+        /* Capas de Fondo */
+        .world-bg {
+            position: fixed;
+            inset: 0;
+            background-image: url('https://img.freepik.com/free-photo/grunge-black-concrete-textured-background_53876-124541.jpg');
+            background-size: cover;
+            background-blend-mode: multiply;
+            background-color: #111;
+            z-index: -2;
+            filter: contrast(1.2) brightness(0.6)
+        }
 
-    .num-btn.clear {
-      background: rgba(255, 77, 77, 0.2);
-      color: #ff4d4d;
-    }
+        .fog-overlay {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle, transparent 40%, rgba(0, 0, 0, 0.8) 100%);
+            z-index: -1;
+            pointer-events: none
+        }
 
-    .fire-wrapper {
-      position: relative;
-      width: 100%;
-      margin: 0 auto;
-      padding: 3px;
-      border-radius: 11px;
-      overflow: hidden;
-      display: flex;
-    }
+        .uid-display {
+            position: fixed;
+            top: 25px;
+            left: 30px;
+            font-family: 'Oswald', sans-serif;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 1.1rem;
+            letter-spacing: 0.1em;
+            z-index: 90;
+            pointer-events: none;
+            border-left: 3px solid var(--blood-fresh);
+            padding-left: 10px
+        }
 
-    .fire-wrapper::before {
-      content: ''; position: absolute;
-      width: 150%; height: 150%;
-      background: conic-gradient(transparent, #00d2ff, #3b82f6, transparent 30%);
-      animation: rotateFire 2s linear infinite;
-      z-index: 0;
-      left: -25%; top: -25%;
-    }
+        .uid-display::before {
+            content: 'SURVIVOR ID: ';
+            color: var(--text-bone);
+            font-weight: 700
+        }
 
-    #login-btn {
-      position: relative;
-      width: 100%;
-      padding: 12px;
-      border-radius: 8px;
-      border: none;
-      background: #000;
-      color: white;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 15px;
-      z-index: 1;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
+        /* Intro Screen */
+        #intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #050505;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1.5s ease-out;
+            gap: 40px
+        }
 
-    @keyframes rotateFire {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
+        #intro-screen.hidden {
+            opacity: 0;
+            pointer-events: none
+        }
 
-    #error-msg {
-      color: #ff4d4d;
-      font-size: 14px;
-      margin-top: 15px;
-      display: none;
-      font-weight: 500;
-    }
+        .profile-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px
+        }
 
-    #main-site { display: none; z-index: 20; }
+        .intro-cover-container {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--blood-dry);
+            box-shadow: 0 0 30px rgba(138, 14, 14, 0.3);
+            filter: grayscale(80%);
+            transition: filter 0.5s;
+            flex-shrink: 0
+        }
 
-    /* Estilos de la Tarjeta (Sin cambios significativos) */
-    .card {
-      width: 340px; height: 450px;
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.15);
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
+        .intro-cover-container:hover {
+            filter: grayscale(0%)
+        }
 
-    .card-header {
-      position: relative;
-      height: 140px;
-      background-image: url('https://cdn.pixabay.com/photo/2017/08/01/08/07/sea-2563389_1280.jpg');
-      background-size: cover;
-      background-position: center;
-      filter: blur(25px);
-    }
+        .intro-gif {
+            width: 100%;
+            height: 100%;
+            object-fit: cover
+        }
 
-    .card-avatar {
-      width: 100px; height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      position: absolute;
-      top: 90px; left: 50%;
-      transform: translateX(-50%);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      z-index: 2;
-      background: white;
-      padding: 3px;
-    }
+        .twd-title-intro {
+            font-family: 'Eater', cursive;
+            font-size: 5rem;
+            color: #e0e0e0;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            text-shadow: 4px 4px 0px #000;
+            margin: 0;
+            background: linear-gradient(to bottom, #fff 40%, #8a0e0e 80%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.8))
+        }
 
-    .card-main {
-      flex: 1;
-      padding-top: 70px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
+        .enter-btn {
+            background: transparent;
+            border: 2px solid var(--text-bone);
+            color: var(--text-bone);
+            font-family: 'Eater', cursive;
+            font-size: 1.5rem;
+            padding: 12px 60px;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            margin-top: 10px
+        }
 
-    .card-fullname { text-align: center; font-size: 20px; font-weight: bold; margin: 10px 0 0 0; color: #333; }
-    .card-jobtitle { text-align: center; font-size: 12px; opacity: 0.6; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; color: #333; }
+        .enter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--blood-fresh);
+            transition: left 0.4s ease;
+            z-index: -1
+        }
 
-    .card-section { display: none; padding: 0 20px; }
-    .card-section.is-active { display: block; animation: fadeIn 0.6s both; }
+        .enter-btn:hover::before {
+            left: 0
+        }
 
-    .card-subtitle { font-weight: 700; font-size: 13px; margin-bottom: 8px; color: #333; }
-    .card-desc { line-height: 1.6; color: #636b6f; font-size: 14px; margin: 0; font-weight: 400; font-family: "DM Sans", sans-serif; }
+        .enter-btn:hover {
+            border-color: var(--blood-fresh);
+            color: white;
+            box-shadow: 0 0 20px rgba(138, 14, 14, 0.6)
+        }
 
-    .card-buttons { display: flex; background-color: #fff; border-top: 1px solid #eee; }
-    .card-buttons button {
-      flex: 1; padding: 15px;
-      background: none; border: none;
-      cursor: pointer;
-      font-family: "Jost", sans-serif;
-      font-size: 13px; font-weight: 500;
-      color: #5c5c6d;
-      transition: 0.3s;
-      border-bottom: 3px solid transparent;
-    }
+        /* Main Grid Container */
+        #main-container {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            grid-template-rows: 1fr;
+            gap: 0;
+            opacity: 0;
+            transition: opacity 1s;
+            z-index: 10;
+            background: #000
+        }
 
-    .card-buttons button.is-active {
-      color: #2b2c48;
-      border-bottom: 3px solid #3b82f6;
-      background: linear-gradient(to bottom, rgba(59, 130, 246, 0) 0%, rgba(59, 130, 246, 0.1) 100%);
-    }
+        #main-container.active {
+            opacity: 1
+        }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: none; }
-    }
-  </style>
+        #main-container.dimmed {
+            opacity: 0.1;
+            filter: sepia(100%) hue-rotate(-50deg) blur(3px);
+            transition: all 1.5s ease
+        }
+
+        .char-box {
+            background: #111;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: transform 0.8s ease, opacity 0.8s ease;
+            position: relative;
+            border-right: 1px solid rgba(255, 255, 255, 0.1)
+        }
+
+        .char-box.reveal {
+            transform: translateY(0);
+            opacity: 1
+        }
+
+        .char-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(1.1) brightness(0.7);
+            transition: all 0.4s
+        }
+
+        .char-box:hover img {
+            filter: grayscale(0%) contrast(1.2) brightness(1)
+        }
+
+        /* Final Card Styles */
+        #final-card-wrapper {
+            position: fixed;
+            z-index: 200;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.98);
+            transition: all 1s ease
+        }
+
+        #final-card-wrapper.show {
+            opacity: 1;
+            pointer-events: auto;
+            transform: scale(1)
+        }
+
+        #final-card-wrapper.hidden-temp {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.98)
+        }
+
+        .grunge-card {
+            display: flex;
+            flex-direction: column;
+            width: 900px;
+            max-width: 90vw;
+            height: 60vh;
+            background: #0f0f0f;
+            background-image: url('https://i.pinimg.com/1200x/cc/db/58/ccdb58f1d6e9e1cb1f2681de9a473a0e.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #333;
+            box-shadow: 0 0 100px rgba(0, 0, 0, 1)
+        }
+
+        .grunge-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.9));
+            z-index: 1
+        }
+
+        .tape {
+            position: absolute;
+            width: 100px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(-45deg);
+            top: 20px;
+            left: -30px;
+            z-index: 30;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(2px)
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            z-index: 50;
+            background: transparent;
+            border: none;
+            color: var(--text-bone);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s
+        }
+
+        .close-btn:hover {
+            color: var(--blood-fresh)
+        }
+
+        #reopen-btn {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 150;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s ease;
+            background: rgba(10, 10, 10, 0.9);
+            border: 1px solid var(--text-bone);
+            color: var(--text-bone);
+            padding: 15px 40px;
+            font-family: 'Eater', cursive;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            text-transform: uppercase
+        }
+
+        #reopen-btn.visible {
+            opacity: 1;
+            pointer-events: auto
+        }
+
+        #reopen-btn:hover {
+            background: var(--blood-fresh);
+            border-color: var(--blood-fresh);
+            color: white
+        }
+
+        .text-section {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center
+        }
+
+        .card-header-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 10px
+        }
+
+        .card-profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--text-bone);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            filter: sepia(30%);
+            flex-shrink: 0
+        }
+
+        .card-profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover
+        }
+
+        .main-name {
+            font-family: 'Eater', cursive;
+            font-size: 5.5rem;
+            margin: 0;
+            z-index: 20;
+            white-space: nowrap;
+            line-height: 1;
+            background-image: linear-gradient(73deg, rgb(193, 202, 212) 1.13333%, rgb(193, 202, 212) 13.35%, rgb(1, 1, 1) 25.5667%, rgb(1, 1, 1) 37.7833%, rgb(193, 202, 212) 50%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: nameWave 4s linear infinite;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+            filter: drop-shadow(0 0 15px rgba(200, 200, 200, 0.3))
+        }
+
+        @keyframes nameWave {
+            0% {
+                background-position: 0% center
+            }
+            100% {
+                background-position: 200% center
+            }
+        }
+
+        .bottom-content {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 80%
+        }
+
+        #user-status {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 0.1em;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 5px 15px;
+            border: 1px solid #333;
+            margin-bottom: 20px
+        }
+
+        .bio-text {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 300;
+            color: #d1d5db;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9)
+        }
+
+        .quote {
+            font-style: italic;
+            color: #aaa;
+            margin-bottom: 10px;
+            border-left: 2px solid var(--blood-fresh);
+            padding-left: 10px;
+            display: inline-block
+        }
+
+        .data-row {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 10px;
+            color: var(--zombie-flesh);
+            font-weight: bold
+        }
+
+        /* Mobile Responsive */
+        @media (max-width:768px) {
+            #main-container {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(3, 1fr)
+            }
+            .profile-row {
+                flex-direction: column;
+                gap: 10px
+            }
+            .intro-cover-container {
+                width: 160px;
+                height: 160px
+            }
+            .twd-title-intro {
+                font-size: 3.5rem
+            }
+            .card-header-row {
+                flex-direction: column;
+                gap: 10px
+            }
+            .card-profile-pic {
+                width: 120px;
+                height: 120px
+            }
+            .main-name {
+                font-size: 3.5rem
+            }
+            .grunge-card {
+                width: 95vw;
+                height: 75vh
+            }
+        }
+    </style>
 </head>
+
 <body>
+    <div class="world-bg"></div>
+    <div class="fog-overlay"></div>
+    <div class="uid-display">1926</div>
 
-<video autoplay muted loop playsinline id="bg-video">
-  <source src="https://cdn.pixabay.com/video/2021/02/27/66423-517408349_large.mp4" type="video/mp4">
-</video>
-
-<div id="login-container">
-  <h2>Ingresar PIN</h2>
-  <input type="password" id="pin-input" maxlength="4" placeholder="****" readonly>
-  
-  <div class="numpad">
-    <button class="num-btn" onclick="addNumber('1')">1</button>
-    <button class="num-btn" onclick="addNumber('2')">2</button>
-    <button class="num-btn" onclick="addNumber('3')">3</button>
-    <button class="num-btn" onclick="addNumber('4')">4</button>
-    <button class="num-btn" onclick="addNumber('5')">5</button>
-    <button class="num-btn" onclick="addNumber('6')">6</button>
-    <button class="num-btn" onclick="addNumber('7')">7</button>
-    <button class="num-btn" onclick="addNumber('8')">8</button>
-    <button class="num-btn" onclick="addNumber('9')">9</button>
-    <button class="num-btn clear" onclick="clearPin()">C</button>
-    <button class="num-btn" onclick="addNumber('0')">0</button>
-    <button class="num-btn clear" onclick="deleteLast()">⌫</button>
-  </div>
-
-  <div class="fire-wrapper">
-    <button id="login-btn">Acceder</button>
-  </div>
-  <p id="error-msg">Contraseña incorrecta sapo(a) 🐸</p>
-</div>
-
-<div id="main-site">
-  <div class="card">
-    <div class="card-header"></div>
-    <img class="card-avatar" src="https://media1.tenor.com/m/LOjjE7euzyYAAAAC/twd-daryl.gif" alt="avatar" />
-    <div class="card-main">
-      <div class="card-fullname">Fran</div>
-      <div class="card-jobtitle">iD xat (1984)</div>
-
-      <div class="card-section is-active" id="about">
-        <div class="card-subtitle">Chileno</div>
-        <p class="card-desc">Prefiero compartir mi tiempo con personas con quienes me siento en sintonía. Si no contesto, es porque no me llamas la atención.</p>
-      </div>
-
-      <div class="card-section" id="experience">
-        <div class="card-subtitle">Chilean</div>
-        <p class="card-desc">I like spending time with people I connect with. If I don’t reply, it’s because you don’t catch my attention.</p>
-      </div>
-
-      <div class="card-section" id="contact">
-        <div class="card-subtitle">تشيلي</div>
-        <p class="card-desc" dir="rtl" style="text-align:right;">أحب قضاء الوقت مع أشخاص أشعر بالانسجام معهم. إذا لم أجب، فذلك لأنك لا تلفت انتباهي.</p>
-      </div>
-
-      <div class="card-buttons">
-        <button class="is-active" onclick="showSection('about', this)">ESPAÑOL</button>
-        <button onclick="showSection('experience', this)">ENGLISH</button>
-        <button onclick="showSection('contact', this)">ARABIC</button>
-      </div>
+    <div id="intro-screen">
+        <div class="profile-row">
+            <div class="intro-cover-container">
+                <img src="https://xatimg.com/image/tBM9pEPdLA09.gif" alt="Cover" class="intro-gif">
+            </div>
+            <h1 class="twd-title-intro">Franco</h1>
+        </div>
+        <button id="start-btn" class="enter-btn">Entrar</button>
     </div>
-  </div>
-</div>
 
-<script>
-  const n = (((550000 * 2) + 980000) / 260000) - (550000 / 550000); 
-  const j = (((550000 * 4) + 1100000) / 330000) - (550000 / 550000); 
-  const k = (((550000 * 2) + 450000) / 1450000) - ((550000 * 3) / 1650000); 
-  const w = (((550000 * 4) + 1100000) / 660000); 
+    <div id="main-container"></div>
 
-  const _x = Math.round(n).toString() + 
-             Math.round(j).toString() + 
-             Math.round(k).toString() + 
-             Math.round(w).toString();
+    <button id="reopen-btn">Perfil</button>
 
-  const loginBtn = document.getElementById("login-btn");
-  const pinInput = document.getElementById("pin-input");
-  const loginContainer = document.getElementById("login-container");
-  const mainSite = document.getElementById("main-site");
-  const errorMsg = document.getElementById("error-msg");
+    <div id="final-card-wrapper">
+        <div class="grunge-card" id="final-card-element">
+            <button class="close-btn" id="close-card-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="tape"></div>
+            <div class="text-section">
+                <div class="card-header-row">
+                    <div class="card-profile-pic">
+                        <img src="https://xatimg.com/image/LzJVRLo4tlNn.gif" alt="Profile">
+                    </div>
+                    <h1 class="main-name">Franco</h1>
+                </div>
+                <div class="bottom-content">
+                    <div id="user-status">SCANNING SIGNAL...</div>
+                    <div class="bio-text">
+                        <p class="quote">"Suelo compartir mi tiempo con personas con quienes me siento en sintonía."</p>
+                        <div class="data-row">
+                            <span class="text-[#cbbba0]"><i class="fa-solid fa-earth-americas"></i> CHILENO</span>
+                            <span class="text-[#cbbba0]">> GÉMINIS ♊︎</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-  function addNumber(num) {
-    if (pinInput.value.length < 4) {
-      pinInput.value += num;
-      errorMsg.style.display = "none";
-    }
-  }
+    <audio id="audio-element" loop>
+        <source src="push.mp3" type="audio/mpeg">
+    </audio>
 
-  function clearPin() {
-    pinInput.value = "";
-  }
+    <script>
+        const images = [
+            "https://i.pinimg.com/1200x/93/af/bd/93afbd2539986b5215607a5856a26d22.jpg",
+            "https://i.pinimg.com/736x/60/c7/af/60c7afb62a810b69e0aa4655b72a83c8.jpg",
+            "https://i.pinimg.com/736x/12/19/c2/1219c284a31ff561be0e2b8cb2924807.jpg",
+            "https://i.pinimg.com/736x/22/07/3f/22073f719747f55163858d7d1fb6a477.jpg",
+            "https://i.pinimg.com/1200x/30/1f/79/301f79539fa33edf13e976178dc6cd51.jpg",
+            "https://i.pinimg.com/1200x/31/70/8f/31708fbaea338d7ebfcdbfff0387d717.jpg",
+            "https://i.pinimg.com/1200x/6c/5b/73/6c5b73d86499afbb7ac2bb8de88334ed.jpg",
+            "https://i.pinimg.com/1200x/6f/9d/74/6f9d7481480e7185ac92a20a627bab6d.jpg",
+            "https://i.pinimg.com/736x/f4/fb/8d/f4fb8d980ccb96e35168faacd10773bc.jpg"
+        ];
 
-  function deleteLast() {
-    pinInput.value = pinInput.value.slice(0, -1);
-  }
+        const container = document.getElementById('main-container');
+        const startBtn = document.getElementById('start-btn');
+        const introScreen = document.getElementById('intro-screen');
+        const finalWrapper = document.getElementById('final-card-wrapper');
+        const audio = document.getElementById('audio-element');
+        const closeBtn = document.getElementById('close-card-btn');
+        const reopenBtn = document.getElementById('reopen-btn');
 
-  loginBtn.addEventListener("click", () => {
-    if (pinInput.value === _x) {
-      loginContainer.style.display = "none";
-      mainSite.style.display = "block";
-    } else {
-      errorMsg.style.display = "block";
-      pinInput.value = "";
-    }
-  });
+        // Función para verificar el estado Online/Offline
+        async function checkStatus() {
+            const username = 'fran';
+            const statusEl = document.getElementById('user-status');
+            try {
+                const response = await fetch(`https://illuxat.com/api/online/${username}`);
+                const data = await response.json();
+                const status = data.data?.status?.toLowerCase();
+                if (status === 'online') {
+                    statusEl.innerHTML = '<span style="color:#4ade80; text-shadow:0 0 10px #4ade80;">● ONLINE</span>';
+                    statusEl.style.borderColor = '#4ade80'
+                } else {
+                    statusEl.innerHTML = '<span style="color:#ef4444; text-shadow:0 0 10px #ef4444;">● OFFLINE</span>';
+                    statusEl.style.borderColor = '#ef4444'
+                }
+            } catch (error) {
+                statusEl.innerHTML = '<span style="color:#ef4444;">● OFFLINE</span>';
+                statusEl.style.borderColor = '#ef4444'
+            }
+        }
 
-  function showSection(sectionId, btn) {
-    document.querySelectorAll('.card-section').forEach(section => {
-      section.classList.remove('is-active');
-    });
-    document.querySelectorAll('.card-buttons button').forEach(button => {
-      button.classList.remove('is-active');
-    });
-    document.getElementById(sectionId).classList.add('is-active');
-    btn.classList.add('is-active');
-  }
-</script>
+        // Renderizar sectores de la grilla
+        images.forEach((url, index) => {
+            const div = document.createElement('div');
+            div.classList.add('char-box');
+            div.style.transitionDelay = `${index * 0.1}s`;
 
+            const img = document.createElement('img');
+            img.src = url;
+            div.appendChild(img);
+
+            const num = document.createElement('div');
+            num.style.position = 'absolute';
+            num.style.top = '10px';
+            num.style.left = '10px';
+            num.style.color = 'rgba(255,255,255,0.7)';
+            num.style.fontFamily = 'Oswald';
+            num.style.fontSize = '0.9rem';
+            num.innerText = `SECTOR 0${index + 1}`;
+            div.appendChild(num);
+
+            container.appendChild(div)
+        });
+
+        // Eventos de interacción
+        startBtn.addEventListener('click', () => {
+            introScreen.classList.add('hidden');
+            audio.volume = 0.5;
+            audio.play().catch(e => console.log("Audio play prevented"));
+            container.classList.add('active');
+
+            const boxes = document.querySelectorAll('.char-box');
+            boxes.forEach((box, index) => {
+                setTimeout(() => box.classList.add('reveal'), index * 120)
+            });
+
+            setTimeout(() => {
+                container.classList.add('dimmed');
+                finalWrapper.classList.add('show');
+                setTimeout(() => {
+                    checkStatus();
+                    setInterval(checkStatus, 60000)
+                }, 500)
+            }, (images.length * 120) + 1000)
+        });
+
+        closeBtn.addEventListener('click', () => {
+            finalWrapper.classList.remove('show');
+            finalWrapper.classList.add('hidden-temp');
+            container.classList.remove('dimmed');
+            reopenBtn.classList.add('visible')
+        });
+
+        reopenBtn.addEventListener('click', () => {
+            finalWrapper.classList.remove('hidden-temp');
+            finalWrapper.classList.add('show');
+            container.classList.add('dimmed');
+            reopenBtn.classList.remove('visible')
+        });
+    </script>
 </body>
+
 </html>
