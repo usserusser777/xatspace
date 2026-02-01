@@ -56,7 +56,6 @@
             -webkit-user-select: none
         }
 
-        /* Capas de Fondo */
         .world-bg {
             position: fixed;
             inset: 0;
@@ -96,7 +95,6 @@
             font-weight: 700
         }
 
-        /* Intro Screen */
         #intro-screen {
             position: fixed;
             top: 0;
@@ -148,13 +146,12 @@
         }
 
         .twd-title-intro {
-            font-family: 'Montserrat', cursive;
+            font-family: 'Montserrat', sans-serif;
             font-size: 5rem;
             color: #e0e0e0;
             text-transform: uppercase;
             letter-spacing: 5px;
             margin: 0;
-            -webkit-background-clip: text;
             filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.8))
         }
 
@@ -162,7 +159,7 @@
             background: transparent;
             border: 2px solid var(--text-bone);
             color: var(--text-bone);
-            font-family: 'Montserrat', cursive;
+            font-family: 'Montserrat', sans-serif;
             font-size: 1.5rem;
             padding: 12px 60px;
             letter-spacing: 3px;
@@ -196,7 +193,6 @@
             box-shadow: 0 0 20px rgba(138, 14, 14, 0.6)
         }
 
-        /* Main Grid Container */
         #main-container {
             position: absolute;
             width: 100vw;
@@ -231,7 +227,7 @@
             overflow: hidden;
             opacity: 0;
             transform: translateY(50px);
-            transition: transform 0.8s ease, opacity 0.8s ease;
+            transition: transform 0.6s ease, opacity 0.6s ease;
             position: relative;
             border-right: 1px solid rgba(255, 255, 255, 0.1)
         }
@@ -253,7 +249,6 @@
             filter: grayscale(0%) contrast(1.2) brightness(1)
         }
 
-        /* Final Card Styles */
         #final-card-wrapper {
             position: fixed;
             z-index: 200;
@@ -347,7 +342,7 @@
             border: 1px solid var(--text-bone);
             color: var(--text-bone);
             padding: 15px 40px;
-            font-family: 'Montserrat', cursive;
+            font-family: 'Montserrat', sans-serif;
             font-size: 1.2rem;
             letter-spacing: 2px;
             cursor: pointer;
@@ -402,7 +397,7 @@
         }
 
         .main-name {
-            font-family: 'Montserrat', cursive;
+            font-family: 'Montserrat', sans-serif;
             font-size: 5.5rem;
             margin: 0;
             z-index: 20;
@@ -419,12 +414,8 @@
         }
 
         @keyframes nameWave {
-            0% {
-                background-position: 0% center
-            }
-            100% {
-                background-position: 200% center
-            }
+            0% { background-position: 0% center }
+            100% { background-position: 200% center }
         }
 
         .bottom-content {
@@ -472,38 +463,15 @@
             font-weight: bold
         }
 
-        /* Mobile Responsive */
         @media (max-width:768px) {
-            #main-container {
-                grid-template-columns: repeat(3, 1fr);
-                grid-template-rows: repeat(3, 1fr)
-            }
-            .profile-row {
-                flex-direction: column;
-                gap: 10px
-            }
-            .intro-cover-container {
-                width: 160px;
-                height: 160px
-            }
-            .twd-title-intro {
-                font-size: 3.5rem
-            }
-            .card-header-row {
-                flex-direction: column;
-                gap: 10px
-            }
-            .card-profile-pic {
-                width: 120px;
-                height: 120px
-            }
-            .main-name {
-                font-size: 3.5rem
-            }
-            .grunge-card {
-                width: 95vw;
-                height: 75vh
-            }
+            #main-container { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr) }
+            .profile-row { flex-direction: column; gap: 10px }
+            .intro-cover-container { width: 160px; height: 160px }
+            .twd-title-intro { font-size: 3.5rem }
+            .card-header-row { flex-direction: column; gap: 10px }
+            .card-profile-pic { width: 120px; height: 120px }
+            .main-name { font-size: 3.5rem }
+            .grunge-card { width: 95vw; height: 75vh }
         }
     </style>
 </head>
@@ -558,132 +526,115 @@
         <source src="push.mp3" type="audio/mpeg">
     </audio>
 
-<script>
-    const images = [
-        "https://i.pinimg.com/1200x/93/af/bd/93afbd2539986b5215607a5856a26d22.jpg",
-        "https://i.pinimg.com/736x/60/c7/af/60c7afb62a810b69e0aa4655b72a83c8.jpg",
-        "https://i.pinimg.com/736x/12/19/c2/1219c284a31ff561be0e2b8cb2924807.jpg",
-        "https://i.pinimg.com/736x/22/07/3f/22073f719747f55163858d7d1fb6a477.jpg",
-        "https://i.pinimg.com/1200x/30/1f/79/301f79539fa33edf13e976178dc6cd51.jpg",
-        "https://i.pinimg.com/1200x/31/70/8f/31708fbaea338d7ebfcdbfff0387d717.jpg",
-        "https://i.pinimg.com/1200x/6c/5b/73/6c5b73d86499afbb7ac2bb8de88334ed.jpg",
-        "https://i.pinimg.com/1200x/6f/9d/74/6f9d7481480e7185ac92a20a627bab6d.jpg",
-        "https://i.pinimg.com/736x/f4/fb/8d/f4fb8d980ccb96e35168faacd10773bc.jpg"
-    ];
+    <script>
+        const images = [
+            "https://i.pinimg.com/1200x/93/af/bd/93afbd2539986b5215607a5856a26d22.jpg",
+            "https://i.pinimg.com/736x/60/c7/af/60c7afb62a810b69e0aa4655b72a83c8.jpg",
+            "https://i.pinimg.com/736x/12/19/c2/1219c284a31ff561be0e2b8cb2924807.jpg",
+            "https://i.pinimg.com/736x/22/07/3f/22073f719747f55163858d7d1fb6a477.jpg",
+            "https://i.pinimg.com/1200x/30/1f/79/301f79539fa33edf13e976178dc6cd51.jpg",
+            "https://i.pinimg.com/1200x/31/70/8f/31708fbaea338d7ebfcdbfff0387d717.jpg",
+            "https://i.pinimg.com/1200x/6c/5b/73/6c5b73d86499afbb7ac2bb8de88334ed.jpg",
+            "https://i.pinimg.com/1200x/6f/9d/74/6f9d7481480e7185ac92a20a627bab6d.jpg",
+            "https://i.pinimg.com/736x/f4/fb/8d/f4fb8d980ccb96e35168faacd10773bc.jpg"
+        ];
 
-    const container = document.getElementById('main-container');
-    const startBtn = document.getElementById('start-btn');
-    const introScreen = document.getElementById('intro-screen');
-    const finalWrapper = document.getElementById('final-card-wrapper');
-    const audio = document.getElementById('audio-element');
-    const closeBtn = document.getElementById('close-card-btn');
-    const reopenBtn = document.getElementById('reopen-btn');
+        const container = document.getElementById('main-container');
+        const startBtn = document.getElementById('start-btn');
+        const introScreen = document.getElementById('intro-screen');
+        const finalWrapper = document.getElementById('final-card-wrapper');
+        const audio = document.getElementById('audio-element');
+        const closeBtn = document.getElementById('close-card-btn');
+        const reopenBtn = document.getElementById('reopen-btn');
 
-    // Función para verificar estado Online/Offline
-    async function checkStatus() {
-        const username = 'fran';
-        const statusEl = document.getElementById('user-status');
-        try {
-            const response = await fetch(`https://illuxat.com/api/online/${username}`);
-            const data = await response.json();
-            const status = data.data?.status?.toLowerCase();
-            if (status === 'online') {
-                statusEl.innerHTML = '<span style="color:#4ade80; text-shadow:0 0 10px #4ade80;">● ONLINE</span>';
-                statusEl.style.borderColor = '#4ade80';
-            } else {
-                statusEl.innerHTML = '<span style="color:#ef4444; text-shadow:0 0 10px #ef4444;">● OFFLINE</span>';
+        async function checkStatus() {
+            const username = 'fran';
+            const statusEl = document.getElementById('user-status');
+            try {
+                const response = await fetch(`https://illuxat.com/api/online/${username}`);
+                const data = await response.json();
+                const status = data.data?.status?.toLowerCase();
+                if (status === 'online') {
+                    statusEl.innerHTML = '<span style="color:#4ade80; text-shadow:0 0 10px #4ade80;">● ONLINE</span>';
+                    statusEl.style.borderColor = '#4ade80';
+                } else {
+                    statusEl.innerHTML = '<span style="color:#ef4444; text-shadow:0 0 10px #ef4444;">● OFFLINE</span>';
+                    statusEl.style.borderColor = '#ef4444';
+                }
+            } catch (error) {
+                statusEl.innerHTML = '<span style="color:#ef4444;">● OFFLINE</span>';
                 statusEl.style.borderColor = '#ef4444';
             }
-        } catch (error) {
-            statusEl.innerHTML = '<span style="color:#ef4444;">● OFFLINE</span>';
-            statusEl.style.borderColor = '#ef4444';
         }
-    }
 
-    // Inyectar imágenes en la grilla
-    images.forEach((url, index) => {
-        const div = document.createElement('div');
-        div.classList.add('char-box');
-        // Transición suave para el efecto de "encendido"
-        div.style.transition = "all 0.6s ease-in-out"; 
+        images.forEach((url, index) => {
+            const div = document.createElement('div');
+            div.classList.add('char-box');
+            div.style.transition = "all 0.4s ease-in-out"; 
 
-        const img = document.createElement('img');
-        img.src = url;
-        div.appendChild(img);
+            const img = document.createElement('img');
+            img.src = url;
+            div.appendChild(img);
 
-        const num = document.createElement('div');
-        num.style.position = 'absolute';
-        num.style.top = '10px';
-        num.style.left = '10px';
-        num.style.color = 'rgba(255,255,255,0.7)';
-        num.style.fontFamily = 'Oswald';
-        num.style.fontSize = '0.9rem';
-        num.innerText = `SECTOR 0${index + 1}`;
-        div.appendChild(num);
+            const num = document.createElement('div');
+            num.style.position = 'absolute';
+            num.style.top = '10px';
+            num.style.left = '10px';
+            num.style.color = 'rgba(255,255,255,0.7)';
+            num.style.fontFamily = 'Montserrat';
+            num.style.fontSize = '0.9rem';
+            num.innerText = `SECTOR 0${index + 1}`;
+            div.appendChild(num);
 
-        container.appendChild(div);
-    });
+            container.appendChild(div);
+        });
 
-    // Lógica de escaneo infinito
-    function startInfiniteScan() {
-        const boxes = document.querySelectorAll('.char-box');
-        
-        const runCycle = () => {
-            boxes.forEach((box, index) => {
-                // Enciende cada imagen cada 1 segundo
-                setTimeout(() => {
-                    box.classList.add('reveal');
-                }, index * 1000);
+        function startInfiniteScan() {
+            const boxes = document.querySelectorAll('.char-box');
+            const runCycle = () => {
+                boxes.forEach((box, index) => {
+                    setTimeout(() => {
+                        box.classList.add('reveal');
+                    }, index * 700); // 0.7 segundos entre imágenes
 
-                // Apaga las imágenes un poco antes de que reinicie el ciclo global
-                setTimeout(() => {
-                    box.classList.remove('reveal');
-                }, (images.length * 1000) + 1500);
-            });
-        };
+                    setTimeout(() => {
+                        box.classList.remove('reveal');
+                    }, (images.length * 700) + 1000);
+                });
+            };
+            runCycle();
+            setInterval(runCycle, (images.length * 700) + 2000);
+        }
 
-        runCycle();
-        // Repite el ciclo: 9 segundos de imágenes + 2 segundos de pausa en negro
-        setInterval(runCycle, (images.length * 1000) + 2500);
-    }
+        startBtn.addEventListener('click', () => {
+            introScreen.classList.add('hidden');
+            audio.volume = 0.5;
+            audio.play().catch(e => console.log("Audio play prevented"));
+            container.classList.add('active');
+            
+            startInfiniteScan();
 
-    // Evento al presionar ENTER
-    startBtn.addEventListener('click', () => {
-        introScreen.classList.add('hidden');
-        audio.volume = 0.5;
-        audio.play().catch(e => console.log("Audio play prevented"));
-        container.classList.add('active');
-
-        // Ejecutar el escaneo repetitivo
-        startInfiniteScan();
-
-        // Mostrar la tarjeta de Franco tras el primer escaneo de 9 segundos
-        setTimeout(() => {
-            container.classList.add('dimmed');
-            finalWrapper.classList.add('show');
+            // Aparece el botón de perfil después del primer escaneo, no la tarjeta
             setTimeout(() => {
+                reopenBtn.classList.add('visible');
                 checkStatus();
                 setInterval(checkStatus, 60000);
-            }, 500);
-        }, (images.length * 1000));
-    });
+            }, (images.length * 700));
+        });
 
-    // Controles de la interfaz
-    closeBtn.addEventListener('click', () => {
-        finalWrapper.classList.remove('show');
-        finalWrapper.classList.add('hidden-temp');
-        container.classList.remove('dimmed');
-        reopenBtn.classList.add('visible');
-    });
+        closeBtn.addEventListener('click', () => {
+            finalWrapper.classList.remove('show');
+            finalWrapper.classList.add('hidden-temp');
+            container.classList.remove('dimmed');
+            reopenBtn.classList.add('visible');
+        });
 
-    reopenBtn.addEventListener('click', () => {
-        finalWrapper.classList.remove('hidden-temp');
-        finalWrapper.classList.add('show');
-        container.classList.add('dimmed');
-        reopenBtn.classList.remove('visible');
-    });
-</script>
- 
+        reopenBtn.addEventListener('click', () => {
+            finalWrapper.classList.remove('hidden-temp');
+            finalWrapper.classList.add('show');
+            container.classList.add('dimmed');
+            reopenBtn.classList.remove('visible');
+        });
+    </script>
 </body>
-
 </html>
