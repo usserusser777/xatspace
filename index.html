@@ -558,7 +558,7 @@
         <source src="push.mp3" type="audio/mpeg">
     </audio>
 
-    <script>
+<script>
     const images = [
         "https://i.pinimg.com/1200x/93/af/bd/93afbd2539986b5215607a5856a26d22.jpg",
         "https://i.pinimg.com/736x/60/c7/af/60c7afb62a810b69e0aa4655b72a83c8.jpg",
@@ -579,7 +579,7 @@
     const closeBtn = document.getElementById('close-card-btn');
     const reopenBtn = document.getElementById('reopen-btn');
 
-    // Función para verificar el estado Online/Offline desde la API
+    // Función para verificar estado Online/Offline
     async function checkStatus() {
         const username = 'fran';
         const statusEl = document.getElementById('user-status');
@@ -587,7 +587,6 @@
             const response = await fetch(`https://illuxat.com/api/online/${username}`);
             const data = await response.json();
             const status = data.data?.status?.toLowerCase();
-            
             if (status === 'online') {
                 statusEl.innerHTML = '<span style="color:#4ade80; text-shadow:0 0 10px #4ade80;">● ONLINE</span>';
                 statusEl.style.borderColor = '#4ade80';
@@ -601,12 +600,12 @@
         }
     }
 
-    // Renderizar los sectores de la grilla (inicialmente ocultos)
+    // Inyectar imágenes en la grilla
     images.forEach((url, index) => {
         const div = document.createElement('div');
         div.classList.add('char-box');
-        // El delay del CSS se ignora aquí ya que manejaremos el tiempo con JS puro
-        div.style.transitionDelay = '0s'; 
+        // Transición suave para el efecto de "encendido"
+        div.style.transition = "all 0.6s ease-in-out"; 
 
         const img = document.createElement('img');
         img.src = url;
@@ -625,43 +624,51 @@
         container.appendChild(div);
     });
 
-    // Acción principal al entrar a la zona
+    // Lógica de escaneo infinito
+    function startInfiniteScan() {
+        const boxes = document.querySelectorAll('.char-box');
+        
+        const runCycle = () => {
+            boxes.forEach((box, index) => {
+                // Enciende cada imagen cada 1 segundo
+                setTimeout(() => {
+                    box.classList.add('reveal');
+                }, index * 1000);
+
+                // Apaga las imágenes un poco antes de que reinicie el ciclo global
+                setTimeout(() => {
+                    box.classList.remove('reveal');
+                }, (images.length * 1000) + 1500);
+            });
+        };
+
+        runCycle();
+        // Repite el ciclo: 9 segundos de imágenes + 2 segundos de pausa en negro
+        setInterval(runCycle, (images.length * 1000) + 2500);
+    }
+
+    // Evento al presionar ENTER
     startBtn.addEventListener('click', () => {
-        // Ocultar intro e iniciar música
         introScreen.classList.add('hidden');
         audio.volume = 0.5;
         audio.play().catch(e => console.log("Audio play prevented"));
-        
-        // Mostrar contenedor principal
         container.classList.add('active');
 
-        const boxes = document.querySelectorAll('.char-box');
-        
-        // Revelar imágenes una por una cada 2 segundos
-        boxes.forEach((box, index) => {
-            setTimeout(() => {
-                box.classList.add('reveal');
-            }, index * 2000); 
-        });
+        // Ejecutar el escaneo repetitivo
+        startInfiniteScan();
 
-        // Calcular cuándo debe aparecer la tarjeta final
-        // (Imágenes * 2 segundos) + 1 segundo extra de espera
-        const totalRevealTime = (images.length * 2000) + 1000;
-
+        // Mostrar la tarjeta de Franco tras el primer escaneo de 9 segundos
         setTimeout(() => {
             container.classList.add('dimmed');
             finalWrapper.classList.add('show');
-            
-            // Iniciar chequeo de status una vez que aparece la tarjeta
             setTimeout(() => {
                 checkStatus();
-                setInterval(checkStatus, 60000); // Actualiza cada minuto
+                setInterval(checkStatus, 60000);
             }, 500);
-            
-        }, totalRevealTime);
+        }, (images.length * 1000));
     });
 
-    // Control de la tarjeta de datos (Cerrar)
+    // Controles de la interfaz
     closeBtn.addEventListener('click', () => {
         finalWrapper.classList.remove('show');
         finalWrapper.classList.add('hidden-temp');
@@ -669,14 +676,14 @@
         reopenBtn.classList.add('visible');
     });
 
-    // Control de la tarjeta de datos (Reabrir)
     reopenBtn.addEventListener('click', () => {
         finalWrapper.classList.remove('hidden-temp');
         finalWrapper.classList.add('show');
         container.classList.add('dimmed');
         reopenBtn.classList.remove('visible');
     });
-    </script>
+</script>
+ 
 </body>
 
 </html>
