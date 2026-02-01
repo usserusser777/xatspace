@@ -559,105 +559,123 @@
     </audio>
 
     <script>
-        const images = [
-            "https://i.pinimg.com/1200x/93/af/bd/93afbd2539986b5215607a5856a26d22.jpg",
-            "https://i.pinimg.com/736x/60/c7/af/60c7afb62a810b69e0aa4655b72a83c8.jpg",
-            "https://i.pinimg.com/736x/12/19/c2/1219c284a31ff561be0e2b8cb2924807.jpg",
-            "https://i.pinimg.com/736x/22/07/3f/22073f719747f55163858d7d1fb6a477.jpg",
-            "https://i.pinimg.com/1200x/30/1f/79/301f79539fa33edf13e976178dc6cd51.jpg",
-            "https://i.pinimg.com/1200x/31/70/8f/31708fbaea338d7ebfcdbfff0387d717.jpg",
-            "https://i.pinimg.com/1200x/6c/5b/73/6c5b73d86499afbb7ac2bb8de88334ed.jpg",
-            "https://i.pinimg.com/1200x/6f/9d/74/6f9d7481480e7185ac92a20a627bab6d.jpg",
-            "https://i.pinimg.com/736x/f4/fb/8d/f4fb8d980ccb96e35168faacd10773bc.jpg"
-        ];
+    const images = [
+        "https://i.pinimg.com/1200x/93/af/bd/93afbd2539986b5215607a5856a26d22.jpg",
+        "https://i.pinimg.com/736x/60/c7/af/60c7afb62a810b69e0aa4655b72a83c8.jpg",
+        "https://i.pinimg.com/736x/12/19/c2/1219c284a31ff561be0e2b8cb2924807.jpg",
+        "https://i.pinimg.com/736x/22/07/3f/22073f719747f55163858d7d1fb6a477.jpg",
+        "https://i.pinimg.com/1200x/30/1f/79/301f79539fa33edf13e976178dc6cd51.jpg",
+        "https://i.pinimg.com/1200x/31/70/8f/31708fbaea338d7ebfcdbfff0387d717.jpg",
+        "https://i.pinimg.com/1200x/6c/5b/73/6c5b73d86499afbb7ac2bb8de88334ed.jpg",
+        "https://i.pinimg.com/1200x/6f/9d/74/6f9d7481480e7185ac92a20a627bab6d.jpg",
+        "https://i.pinimg.com/736x/f4/fb/8d/f4fb8d980ccb96e35168faacd10773bc.jpg"
+    ];
 
-        const container = document.getElementById('main-container');
-        const startBtn = document.getElementById('start-btn');
-        const introScreen = document.getElementById('intro-screen');
-        const finalWrapper = document.getElementById('final-card-wrapper');
-        const audio = document.getElementById('audio-element');
-        const closeBtn = document.getElementById('close-card-btn');
-        const reopenBtn = document.getElementById('reopen-btn');
+    const container = document.getElementById('main-container');
+    const startBtn = document.getElementById('start-btn');
+    const introScreen = document.getElementById('intro-screen');
+    const finalWrapper = document.getElementById('final-card-wrapper');
+    const audio = document.getElementById('audio-element');
+    const closeBtn = document.getElementById('close-card-btn');
+    const reopenBtn = document.getElementById('reopen-btn');
 
-        // Función para verificar el estado Online/Offline
-        async function checkStatus() {
-            const username = 'fran';
-            const statusEl = document.getElementById('user-status');
-            try {
-                const response = await fetch(`https://illuxat.com/api/online/${username}`);
-                const data = await response.json();
-                const status = data.data?.status?.toLowerCase();
-                if (status === 'online') {
-                    statusEl.innerHTML = '<span style="color:#4ade80; text-shadow:0 0 10px #4ade80;">● ONLINE</span>';
-                    statusEl.style.borderColor = '#4ade80'
-                } else {
-                    statusEl.innerHTML = '<span style="color:#ef4444; text-shadow:0 0 10px #ef4444;">● OFFLINE</span>';
-                    statusEl.style.borderColor = '#ef4444'
-                }
-            } catch (error) {
-                statusEl.innerHTML = '<span style="color:#ef4444;">● OFFLINE</span>';
-                statusEl.style.borderColor = '#ef4444'
+    // Función para verificar el estado Online/Offline desde la API
+    async function checkStatus() {
+        const username = 'fran';
+        const statusEl = document.getElementById('user-status');
+        try {
+            const response = await fetch(`https://illuxat.com/api/online/${username}`);
+            const data = await response.json();
+            const status = data.data?.status?.toLowerCase();
+            
+            if (status === 'online') {
+                statusEl.innerHTML = '<span style="color:#4ade80; text-shadow:0 0 10px #4ade80;">● ONLINE</span>';
+                statusEl.style.borderColor = '#4ade80';
+            } else {
+                statusEl.innerHTML = '<span style="color:#ef4444; text-shadow:0 0 10px #ef4444;">● OFFLINE</span>';
+                statusEl.style.borderColor = '#ef4444';
             }
+        } catch (error) {
+            statusEl.innerHTML = '<span style="color:#ef4444;">● OFFLINE</span>';
+            statusEl.style.borderColor = '#ef4444';
         }
+    }
 
-        // Renderizar sectores de la grilla
-        images.forEach((url, index) => {
-            const div = document.createElement('div');
-            div.classList.add('char-box');
-            div.style.transitionDelay = `${index * 0.1}s`;
+    // Renderizar los sectores de la grilla (inicialmente ocultos)
+    images.forEach((url, index) => {
+        const div = document.createElement('div');
+        div.classList.add('char-box');
+        // El delay del CSS se ignora aquí ya que manejaremos el tiempo con JS puro
+        div.style.transitionDelay = '0s'; 
 
-            const img = document.createElement('img');
-            img.src = url;
-            div.appendChild(img);
+        const img = document.createElement('img');
+        img.src = url;
+        div.appendChild(img);
 
-            const num = document.createElement('div');
-            num.style.position = 'absolute';
-            num.style.top = '10px';
-            num.style.left = '10px';
-            num.style.color = 'rgba(255,255,255,0.7)';
-            num.style.fontFamily = 'Montserrat';
-            num.style.fontSize = '0.9rem';
-            num.innerText = `SECTOR 0${index + 1}`;
-            div.appendChild(num);
+        const num = document.createElement('div');
+        num.style.position = 'absolute';
+        num.style.top = '10px';
+        num.style.left = '10px';
+        num.style.color = 'rgba(255,255,255,0.7)';
+        num.style.fontFamily = 'Oswald';
+        num.style.fontSize = '0.9rem';
+        num.innerText = `SECTOR 0${index + 1}`;
+        div.appendChild(num);
 
-            container.appendChild(div)
-        });
+        container.appendChild(div);
+    });
 
-        // Eventos de interacción
-        startBtn.addEventListener('click', () => {
-            introScreen.classList.add('hidden');
-            audio.volume = 0.5;
-            audio.play().catch(e => console.log("Audio play prevented"));
-            container.classList.add('active');
+    // Acción principal al entrar a la zona
+    startBtn.addEventListener('click', () => {
+        // Ocultar intro e iniciar música
+        introScreen.classList.add('hidden');
+        audio.volume = 0.5;
+        audio.play().catch(e => console.log("Audio play prevented"));
+        
+        // Mostrar contenedor principal
+        container.classList.add('active');
 
-            const boxes = document.querySelectorAll('.char-box');
-            boxes.forEach((box, index) => {
-                setTimeout(() => box.classList.add('reveal'), index * 120)
-            });
-
+        const boxes = document.querySelectorAll('.char-box');
+        
+        // Revelar imágenes una por una cada 2 segundos
+        boxes.forEach((box, index) => {
             setTimeout(() => {
-                container.classList.add('dimmed');
-                finalWrapper.classList.add('show');
-                setTimeout(() => {
-                    checkStatus();
-                    setInterval(checkStatus, 60000)
-                }, 500)
-            }, (images.length * 120) + 1000)
+                box.classList.add('reveal');
+            }, index * 2000); 
         });
 
-        closeBtn.addEventListener('click', () => {
-            finalWrapper.classList.remove('show');
-            finalWrapper.classList.add('hidden-temp');
-            container.classList.remove('dimmed');
-            reopenBtn.classList.add('visible')
-        });
+        // Calcular cuándo debe aparecer la tarjeta final
+        // (Imágenes * 2 segundos) + 1 segundo extra de espera
+        const totalRevealTime = (images.length * 2000) + 1000;
 
-        reopenBtn.addEventListener('click', () => {
-            finalWrapper.classList.remove('hidden-temp');
-            finalWrapper.classList.add('show');
+        setTimeout(() => {
             container.classList.add('dimmed');
-            reopenBtn.classList.remove('visible')
-        });
+            finalWrapper.classList.add('show');
+            
+            // Iniciar chequeo de status una vez que aparece la tarjeta
+            setTimeout(() => {
+                checkStatus();
+                setInterval(checkStatus, 60000); // Actualiza cada minuto
+            }, 500);
+            
+        }, totalRevealTime);
+    });
+
+    // Control de la tarjeta de datos (Cerrar)
+    closeBtn.addEventListener('click', () => {
+        finalWrapper.classList.remove('show');
+        finalWrapper.classList.add('hidden-temp');
+        container.classList.remove('dimmed');
+        reopenBtn.classList.add('visible');
+    });
+
+    // Control de la tarjeta de datos (Reabrir)
+    reopenBtn.addEventListener('click', () => {
+        finalWrapper.classList.remove('hidden-temp');
+        finalWrapper.classList.add('show');
+        container.classList.add('dimmed');
+        reopenBtn.classList.remove('visible');
+    });
     </script>
 </body>
 
