@@ -595,15 +595,15 @@
                 boxes.forEach((box, index) => {
                     setTimeout(() => {
                         box.classList.add('reveal');
-                    }, index * 700); // 0.7 segundos entre imágenes
+                    }, index * 500); // 0.7 segundos entre imágenes
 
                     setTimeout(() => {
                         box.classList.remove('reveal');
-                    }, (images.length * 700) + 1000);
+                    }, (images.length * 500) + 1000);
                 });
             };
             runCycle();
-            setInterval(runCycle, (images.length * 700) + 2000);
+            setInterval(runCycle, (images.length * 500) + 2000);
         }
 
         startBtn.addEventListener('click', () => {
