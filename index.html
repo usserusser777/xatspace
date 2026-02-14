@@ -577,10 +577,17 @@
             div.appendChild(img);
 
             const num = document.createElement('div');
+
             num.style.position = 'absolute';
+
+            // Posicionamiento abajo y centrado
+            num.style.bottom = '15px';       // Separación de 15px desde el borde inferior
+            num.style.left = '50%';          // Lo mueve al centro horizontal
+            num.style.transform = 'translateX(-50%)'; // Ajuste perfecto para que el centro del texto coincida con el centro del cuadro
+
             num.style.top = '10px';
             num.style.left = '10px';
-            num.style.color = 'rgba(255,255,255,0.7)';
+            num.style.color = '#0048d4';
             num.style.fontFamily = 'Montserrat';
             num.style.fontSize = '0.9rem';
             num.innerText = `SECTOR 0${index + 1}`;
