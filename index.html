@@ -42,6 +42,48 @@
             --metal-dirty: #5a5a5a
         }
 
+        /* --- Estilos del Cursor Moderno --- */
+        * {
+            cursor: none !important; /* Escondemos el cursor default */
+        }
+
+        .custom-cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--text-bone);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease-out;
+            transform: translate(-50%, -50%);
+            animation: pulseCursor 2s infinite;
+        }
+
+        .cursor-dot {
+            width: 4px;
+            height: 4px;
+            background-color: var(--text-bone);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes pulseCursor {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+            50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.3; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+        }
+
+        .cursor-click {
+            transform: translate(-50%, -50%) scale(3) !important;
+            opacity: 0 !important;
+            transition: all 0.3s ease;
+        }
+        /* --------------------------------- */
+
         body {
             background-color: var(--bg-decay);
             color: var(--text-bone);
@@ -191,7 +233,7 @@
         .enter-btn:hover {
             border-color: var(--blood-fresh);
             color: white;
-            bbox-shadow: 0 0 20px rgba(14, 64, 138, 0.6);
+            box-shadow: 0 0 20px rgba(14, 64, 138, 0.6);
         }
 
         #main-container {
@@ -477,6 +519,9 @@
 </head>
 
 <body>
+    <div class="custom-cursor" id="cursor"></div>
+    <div class="cursor-dot" id="cursor-dot"></div>
+
     <div class="world-bg"></div>
     <div class="fog-overlay"></div>
     <div class="uid-display">1926</div>
@@ -493,7 +538,7 @@
 
     <div id="main-container"></div>
 
-    <button id="reopen-btn" class"start-btn">Perfil</button>
+    <button id="reopen-btn">Perfil</button>
 
     <div id="final-card-wrapper">
         <div class="grunge-card" id="final-card-element">
@@ -527,6 +572,26 @@
     </audio>
 
     <script>
+        /* --- Lógica del Cursor --- */
+        const cursor = document.getElementById('cursor');
+        const dot = document.getElementById('cursor-dot');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            dot.style.left = e.clientX + 'px';
+            dot.style.top = e.clientY + 'px';
+        });
+
+        document.addEventListener('mousedown', () => {
+            cursor.classList.add('cursor-click');
+        });
+
+        document.addEventListener('mouseup', () => {
+            cursor.classList.remove('cursor-click');
+        });
+
+        /* --- Lógica de la Galería --- */
         const images = [
             "https://xatimg.com/image/Yt2BM15XUZZr.jpg",
             "https://xatimg.com/image/jeAWPGQ08NV1.jpg",
@@ -577,11 +642,8 @@
             div.appendChild(img);
 
             const num = document.createElement('div');
-
             num.style.position = 'absolute';
-
-            // Posicionamiento abajo y centrado
-            num.style.bottom = '10px';       // Separación de 15px desde el borde inferior
+            num.style.bottom = '10px';
             num.style.color = '#0048d4';
             num.style.fontFamily = 'Montserrat';
             num.style.fontSize = '0.9rem';
@@ -597,7 +659,7 @@
                 boxes.forEach((box, index) => {
                     setTimeout(() => {
                         box.classList.add('reveal');
-                    }, index * 500); // 0.7 segundos entre imágenes
+                    }, index * 500);
 
                     setTimeout(() => {
                         box.classList.remove('reveal');
@@ -616,7 +678,6 @@
             
             startInfiniteScan();
 
-            // Aparece el botón de perfil después del primer escaneo, no la tarjeta
             setTimeout(() => {
                 reopenBtn.classList.add('visible');
                 checkStatus();
